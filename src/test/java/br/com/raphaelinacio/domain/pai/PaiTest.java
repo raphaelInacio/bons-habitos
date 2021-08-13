@@ -1,6 +1,7 @@
 package br.com.raphaelinacio.domain.pai;
 
-import br.com.raphaelinacio.domain.rotina.Habito;
+import br.com.raphaelinacio.domain.rotina.Atividade;
+import br.com.raphaelinacio.domain.rotina.Rotina;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,6 @@ class PaiTest extends DataBuilder {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Pai("", new Email("contato.raphaelinacio@gmail.com")));
     }
 
-
     @Test
     void incluirFilho() {
         Pai pai = criarPai();
@@ -22,13 +22,27 @@ class PaiTest extends DataBuilder {
     }
 
     @Test
-    void criarAtividadeParaMeuFilho() {
+    void deveCriarAtividadeParaMeuFilho() {
         Pai pai = criarPaiComFilho();
-        Habito habito = criarHabito();
-        pai.criarHabitoParaMeuFilho(criarFilho(), habito);
-        List<Habito> habitos = pai.habitosDoMeu(pai.meusFilhos().get(0));
-        Assertions.assertEquals(habito, habitos.stream().findFirst().get());
+        Atividade atividade = criarAtividade();
+        pai.criarAtividadeParaMeuFilho(criarFilho(), atividade);
+        List<Atividade> atividades = pai.atividadesDoMeu(pai.meusFilhos().get(0));
+        Assertions.assertEquals(atividade, atividades.stream().findFirst().get());
     }
 
+    @Test
+    void deveCriarRotinasCorretamente() {
+        var pai = criarPaiComRotina();
+        Assertions.assertEquals(1, pai.minhaRotina().size());
+    }
+
+    @Test
+    void deveCriarRegistrarParcipacaoDiariaNaRotinaCorretamente() {
+        var pai = criarPaiComRotina();
+        Assertions.assertEquals(1, pai.minhaRotina().size());
+        Rotina rotina = pai.minhaRotina().stream().findFirst().get();
+        pai.registrarParticipacaoDiaria(rotina);
+        Assertions.assertEquals(1, rotina.verHistoricoDeParticipacoes().size());
+    }
 
 }

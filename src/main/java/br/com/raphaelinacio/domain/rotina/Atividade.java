@@ -3,13 +3,13 @@ package br.com.raphaelinacio.domain.rotina;
 
 import java.util.Objects;
 
-public class Habito {
+public class Atividade {
 
     private String nome;
     private String titulo;
     private String descricao;
 
-    public Habito(String nome, String titulo, String descricao) {
+    public Atividade(String nome, String titulo, String descricao) {
         if (Objects.isNull(nome) || nome.length() == 0) {
             throw new IllegalArgumentException("Nome não informado");
         }

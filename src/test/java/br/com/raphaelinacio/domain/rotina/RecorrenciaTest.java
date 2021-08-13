@@ -1,5 +1,6 @@
 package br.com.raphaelinacio.domain.rotina;
 
+import br.com.raphaelinacio.domain.pai.DataBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -7,11 +8,11 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RecorrenciaTest {
+class RecorrenciaTest extends DataBuilder {
 
     @Test
     public void deveCriarUmaRecorrencia() {
-        new Recorrencia(TipoRecorrenciaEnum.DIARIA, new HorarioRecorrencia(LocalTime.now()), LocalDate.now());
+        criarRecorrencia();
     }
 
     @Test

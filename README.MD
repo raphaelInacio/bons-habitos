@@ -1,9 +1,9 @@
-### Bons habitos para crianças
+### Bons atividades para crianças
 
-Pais podem escolher habitos para os seus filhos diários para os seus filhos, como também podem criar novos habitos
-ou escolher habitos de outras pessoas.
+Pais podem escolher atividades para os seus filhos diários para os seus filhos, como também podem criar novos atividades
+ou escolher atividades de outras pessoas.
 
-Cada habito possui uma descrição
+Cada atividade possui uma descrição
 
 ### 
 Seu filho passa horas no celular ou no videogame e você não sabe mais o que fazer?
@@ -19,7 +19,7 @@ Tudo isso de forma fácil, intuitiva e divertida
 - Utilizar tarefas já criadas por outros usuários.
 - Ser notificado quando for o horário de uma atividade.
 - Criar usuario
-- Criar notificação de habito
+- Criar notificação de atividade
 
 ### Quais os pilares para essa aplicação
 

@@ -1,7 +1,7 @@
 package br.com.raphaelinacio.domain.pai;
 
+import br.com.raphaelinacio.domain.rotina.Atividade;
 import br.com.raphaelinacio.domain.rotina.Rotina;
-import br.com.raphaelinacio.domain.rotina.Habito;
 
 import java.util.*;
 
@@ -9,7 +9,7 @@ public class Pai {
     private String nome;
     private Email email;
     private List<Filho> filhos = new ArrayList<>();
-    private Map<Filho, List<Habito>> habitosParaMeusFilhos = new HashMap<>();
+    private Map<Filho, List<Atividade>> atividadesParaMeusFilhos = new HashMap<>();
     private List<Rotina> rotinasParaMeusFilhos = new ArrayList<>();
 
     public Pai(String nome, Email email) {
@@ -26,24 +26,28 @@ public class Pai {
         return this.filhos;
     }
 
-    public Map<Filho, List<Habito>> habitosDosMeusFilhos() {
-        return this.habitosParaMeusFilhos;
-    }
-
-    public List<Habito> habitosDoMeu(Filho filho) {
-        return this.habitosParaMeusFilhos.get(filho);
+    public List<Atividade> atividadesDoMeu(Filho filho) {
+        return this.atividadesParaMeusFilhos.get(filho);
     }
 
     public void criarRotinaParaMeuFilho(Rotina rotina) {
-
+        this.rotinasParaMeusFilhos.add(rotina);
     }
 
-    public void criarHabitoParaMeuFilho(Filho filho, Habito habito) {
-        if (!this.habitosParaMeusFilhos.containsKey(filho)) {
-            this.habitosParaMeusFilhos.put(filho, Arrays.asList(habito));
+    public List<Rotina> minhaRotina() {
+        return this.rotinasParaMeusFilhos;
+    }
+
+    public void registrarParticipacaoDiaria(Rotina rotina) {
+        rotina.registrarParticipacaoDiaria();
+    }
+
+    public void criarAtividadeParaMeuFilho(Filho filho, Atividade atividade) {
+        if (!this.atividadesParaMeusFilhos.containsKey(filho)) {
+            this.atividadesParaMeusFilhos.put(filho, Arrays.asList(atividade));
         } else {
-            var habitosDoMeuFilho = this.habitosParaMeusFilhos.get(filho);
-            habitosDoMeuFilho.add(habito);
+            var habitosDoMeuFilho = this.atividadesParaMeusFilhos.get(filho);
+            habitosDoMeuFilho.add(atividade);
         }
     }
 

@@ -1,5 +1,6 @@
 package br.com.raphaelinacio.core.domain.pai;
 
+import br.com.raphaelinacio.core.DataBuilder;
 import br.com.raphaelinacio.core.domain.rotina.Atividade;
 import br.com.raphaelinacio.core.domain.rotina.Rotina;
 import org.junit.jupiter.api.Assertions;
@@ -24,7 +25,7 @@ class PaiTest extends DataBuilder {
     @Test
     void deveCriarAtividadeParaMeuFilho() {
         Pai pai = criarPaiComFilho();
-        Atividade atividade = criarAtividade();
+        Atividade atividade = criarAtividadeSistema();
         pai.criarAtividadeParaMeuFilho(criarFilho(), atividade);
         List<Atividade> atividades = pai.atividadesDoMeu(pai.meusFilhos().get(0));
         Assertions.assertEquals(atividade, atividades.stream().findFirst().get());

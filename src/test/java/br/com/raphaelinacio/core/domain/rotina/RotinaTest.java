@@ -1,6 +1,6 @@
 package br.com.raphaelinacio.core.domain.rotina;
 
-import br.com.raphaelinacio.core.domain.pai.DataBuilder;
+import br.com.raphaelinacio.core.DataBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

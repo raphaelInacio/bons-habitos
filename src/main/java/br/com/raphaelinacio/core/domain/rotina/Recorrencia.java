@@ -17,4 +17,12 @@ public class Recorrencia {
         this.horarioRecorrencia = horarioRecorrencia;
         this.dataDeInicio = dataDeInicio;
     }
+
+    public TipoRecorrenciaEnum getTipoRecorrencia() {
+        return tipoRecorrencia;
+    }
+
+    public HorarioRecorrencia getHorarioRecorrencia() {
+        return horarioRecorrencia;
+    }
 }

@@ -11,7 +11,6 @@ import java.util.List;
 public class Rotina {
     private Recorrencia recorrencia;
     private Atividade atividade;
-    private Filho filho;
 
     public List<Historico> verHistoricoDeParticipacoes() {
         return historicoDeParticipacoes;
@@ -19,10 +18,9 @@ public class Rotina {
 
     private List<Historico> historicoDeParticipacoes = new ArrayList<>();
 
-    public Rotina(Recorrencia recorrencia, Atividade atividade, Filho filho) {
+    public Rotina(Recorrencia recorrencia, Atividade atividade) {
         this.recorrencia = recorrencia;
         this.atividade = atividade;
-        this.filho = filho;
     }
 
     private static boolean temMesmaData(Historico historico) {
@@ -40,4 +38,11 @@ public class Rotina {
         historicoDeParticipacoes.add(new Historico());
     }
 
+    public Atividade getAtividade() {
+        return atividade;
+    }
+
+    public Recorrencia getRecorrencia() {
+        return recorrencia;
+    }
 }

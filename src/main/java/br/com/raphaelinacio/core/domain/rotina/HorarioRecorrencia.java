@@ -12,4 +12,9 @@ public class HorarioRecorrencia {
         }
         this.localTime = localTime;
     }
+
+    public LocalTime getLocalTime() {
+        return localTime;
+    }
+
 }

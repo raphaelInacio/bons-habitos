@@ -8,6 +8,7 @@ import br.com.raphaelinacio.core.domain.rotina.AtividadeRepository;
 import java.util.UUID;
 
 public class IncluirAtividadeParaMeuFilho {
+
     private final PaiRepository paiRepository;
     private final AtividadeRepository atividadeRepository;
 

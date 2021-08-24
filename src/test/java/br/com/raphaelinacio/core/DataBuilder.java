@@ -13,6 +13,33 @@ public class DataBuilder {
     public static String nomeFilho = "Raphael Silva Dias";
     public static Atividade atividadeGlobal;
     public static Pai paiGlobal;
+    public static Rotina rotinaGlobal;
+
+
+    public RotinaRepository rotinaRepository = new RotinaRepository() {
+
+        Map<String, List<Rotina>> bancoDeRotinas = new HashMap<>();
+
+        @Override
+        public void criarRotina(Pai pai, Rotina rotina) {
+            if (bancoDeRotinas.containsKey(pai.getEmail().getEndereco())) {
+                List<Rotina> rotinas = bancoDeRotinas.get(pai.getEmail().getEndereco());
+                rotinas.add(rotina);
+            } else {
+                bancoDeRotinas.put(pai.getEmail().getEndereco(), Arrays.asList(rotina));
+            }
+        }
+
+        @Override
+        public List<Rotina> buscarMinhasRotinas(Pai pai) {
+            if (bancoDeRotinas.containsKey(pai.getEmail().getEndereco())) {
+                return bancoDeRotinas.get(pai.getEmail().getEndereco());
+            } else {
+                return Collections.EMPTY_LIST;
+            }
+        }
+
+    };
 
     public AtividadeRepository atividadeRepository = new AtividadeRepository() {
 
@@ -85,7 +112,7 @@ public class DataBuilder {
     public Pai criarPaiComRotina() {
         Pai pai = criarPaiComAtividade();
         List<Atividade> atividades = pai.atividadesDoMeu(pai.meusFilhos().get(0));
-        var rotina = new Rotina(criarRecorrencia(), atividades.get(0), pai.meusFilhos().get(0));
+        var rotina = new Rotina(criarRecorrencia(), atividades.get(0));
         pai.criarRotinaParaMeuFilho(rotina);
         return pai;
     }
@@ -93,8 +120,10 @@ public class DataBuilder {
     public void iniciarEscopoGlobal() {
         atividadeGlobal = criarAtividadeSistema();
         paiGlobal = criarPaiComFilho();
+        rotinaGlobal = criarRotina();
         paiRepository.cadastrarPai(paiGlobal);
         atividadeRepository.criarAtividade(paiGlobal, atividadeGlobal);
+        rotinaRepository.criarRotina(paiGlobal, rotinaGlobal);
     }
 
     public Atividade criarAtividadeSistema() {
@@ -116,7 +145,7 @@ public class DataBuilder {
     }
 
     public Rotina criarRotina() {
-        return new Rotina(criarRecorrencia(), criarAtividadeSistema(), criarFilho());
+        return new Rotina(criarRecorrencia(), criarAtividadeSistema());
     }
 
 }

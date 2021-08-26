@@ -1,16 +1,17 @@
 package br.com.raphaelinacio.core.domain.rotina;
 
-import br.com.raphaelinacio.core.domain.pai.Filho;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Rotina {
+    private UUID codigo;
     private Recorrencia recorrencia;
     private Atividade atividade;
+    private TipoRotina tipoRotina;
 
     public List<Historico> verHistoricoDeParticipacoes() {
         return historicoDeParticipacoes;
@@ -21,6 +22,18 @@ public class Rotina {
     public Rotina(Recorrencia recorrencia, Atividade atividade) {
         this.recorrencia = recorrencia;
         this.atividade = atividade;
+        this.codigo = UUID.randomUUID();
+        this.tipoRotina = TipoRotina.SISTEMA;
+    }
+
+    public Rotina(Recorrencia recorrencia, Atividade atividade, TipoRotina tipoRotina) {
+        if (TipoRotina.SISTEMA.equals(tipoRotina)) {
+            throw new IllegalArgumentException("Pais não podem criar rotinas de sistema");
+        }
+        this.recorrencia = recorrencia;
+        this.atividade = atividade;
+        this.codigo = UUID.randomUUID();
+        this.tipoRotina = TipoRotina.PAI;
     }
 
     private static boolean temMesmaData(Historico historico) {
@@ -44,5 +57,13 @@ public class Rotina {
 
     public Recorrencia getRecorrencia() {
         return recorrencia;
+    }
+
+    public TipoRotina getTipoRotina() {
+        return tipoRotina;
+    }
+
+    public UUID getCodigo() {
+        return codigo;
     }
 }

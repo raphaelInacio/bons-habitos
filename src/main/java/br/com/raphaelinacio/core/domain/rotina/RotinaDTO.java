@@ -26,7 +26,7 @@ public class RotinaDTO {
                 new HorarioRecorrencia(horarioRecorrencia),
                 LocalDate.now());
 
-        return new Rotina(recorrencia, atividade);
+        return new Rotina(recorrencia, atividade, TipoRotina.PAI);
     }
 
     public static List<RotinaDTO> converte(List<Rotina> rotinas) {

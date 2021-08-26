@@ -14,7 +14,7 @@ class CadastrarPaiNoSistemaTest extends DataBuilder {
 
     @Test
     void deveCadastrarUmPaiNoSistemaCorretamente() throws CadastroPaiException, PaiNaoCadastradoException {
-        cadastrarPaiNoSistema.executar("Raphael Inacio", "contato.raphaelinacio@gmail.com", "Raphael Silva Dias", LocalDate.now());
+        cadastrarPaiNoSistema.executar("Raphael Inacio", "raphaelinacio@gmail.com", "Raphael Silva Dias", LocalDate.now());
     }
 
     @Test

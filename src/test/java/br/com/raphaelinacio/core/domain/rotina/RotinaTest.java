@@ -9,15 +9,28 @@ import static org.junit.jupiter.api.Assertions.*;
 class RotinaTest extends DataBuilder {
 
     @Test
-    void deveCriarUmaRotina() {
-        var rotina = criarRotina();
+    void deveCriarUmaRotinaDeSistema() {
+        var rotina = criarRotinaSistema();
         assertNotNull(rotina);
+        assertEquals(TipoRotina.SISTEMA, rotina.getTipoRotina());
+    }
+
+    @Test
+    void deveCriarUmaRotinaPai() {
+        var rotina = criarRotinaPai();
+        assertNotNull(rotina);
+        assertEquals(TipoRotina.PAI, rotina.getTipoRotina());
+    }
+
+    @Test
+    void naoDevePermitirQuePaisCriemRotinasDeSistema() {
+        assertThrows(IllegalArgumentException.class, () -> new Rotina(criarRecorrencia(), criarAtividadeSistema(), TipoRotina.SISTEMA));
     }
 
     @Test
     void naoDevePermitirRegistrarDuasNoMesmoDiaMesmaRotina() {
         Assertions.assertThrows(IllegalStateException.class, () -> {
-            var rotina = criarRotina();
+            var rotina = criarRotinaSistema();
             rotina.registrarParticipacaoDiaria();
             rotina.registrarParticipacaoDiaria();
         });
@@ -25,7 +38,7 @@ class RotinaTest extends DataBuilder {
 
     @Test
     void deveVerHistoricoDeParticipacoes() {
-        var rotina = criarRotina();
+        var rotina = criarRotinaSistema();
         rotina.registrarParticipacaoDiaria();
         Assertions.assertEquals(1, rotina.verHistoricoDeParticipacoes().size());
     }

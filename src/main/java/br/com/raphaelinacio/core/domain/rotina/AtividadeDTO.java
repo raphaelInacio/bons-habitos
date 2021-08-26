@@ -30,13 +30,4 @@ public class AtividadeDTO {
                 this.descricao
         );
     }
-
-    public Atividade converterParaDominioAtividadePai() {
-        return new Atividade(
-                this.nome,
-                this.titulo,
-                this.descricao,
-                TipoAtividade.PAI
-        );
-    }
 }

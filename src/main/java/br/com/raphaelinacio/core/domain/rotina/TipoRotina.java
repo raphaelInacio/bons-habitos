@@ -1,5 +1,5 @@
 package br.com.raphaelinacio.core.domain.rotina;
 
-public enum TipoAtividade {
+public enum TipoRotina {
     PAI, SISTEMA
 }

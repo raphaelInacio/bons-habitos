@@ -7,85 +7,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class DataBuilder {
+public class DataBuilder extends DatabaseMock {
 
     public static Email email = new Email("contato.raphaelinacio@gmail.com");
     public static String nomeFilho = "Raphael Silva Dias";
     public static Atividade atividadeGlobal;
     public static Pai paiGlobal;
     public static Rotina rotinaGlobal;
-
-
-    public RotinaRepository rotinaRepository = new RotinaRepository() {
-
-        Map<String, List<Rotina>> bancoDeRotinas = new HashMap<>();
-
-        @Override
-        public void criarRotina(Pai pai, Rotina rotina) {
-            if (bancoDeRotinas.containsKey(pai.getEmail().getEndereco())) {
-                List<Rotina> rotinas = bancoDeRotinas.get(pai.getEmail().getEndereco());
-                rotinas.add(rotina);
-            } else {
-                bancoDeRotinas.put(pai.getEmail().getEndereco(), Arrays.asList(rotina));
-            }
-        }
-
-        @Override
-        public List<Rotina> buscarMinhasRotinas(Pai pai) {
-            if (bancoDeRotinas.containsKey(pai.getEmail().getEndereco())) {
-                return bancoDeRotinas.get(pai.getEmail().getEndereco());
-            } else {
-                return Collections.EMPTY_LIST;
-            }
-        }
-
-    };
-
-    public AtividadeRepository atividadeRepository = new AtividadeRepository() {
-
-        Map<UUID, Atividade> bancoDeAtividades = new HashMap<>();
-
-        @Override
-        public Atividade buscarAtividade(UUID codigoAtividade) throws AtividadeNaoCadastradaException {
-            if (bancoDeAtividades.containsKey(codigoAtividade)) {
-                return bancoDeAtividades.get(codigoAtividade);
-            }
-            throw new AtividadeNaoCadastradaException("Não existe atividade cadastrada com esse ID");
-        }
-
-        @Override
-        public void criarAtividade(Pai pai, Atividade atividade) {
-            bancoDeAtividades.put(atividade.getCodigo(), atividade);
-        }
-
-        @Override
-        public void associarAtividade(Pai pai, Atividade atividade) {
-            bancoDeAtividades.put(atividade.getCodigo(), atividade);
-        }
-    };
-
-    public PaiRepository paiRepository = new PaiRepository() {
-
-        Map<String, Pai> bancoDeDados = new HashMap<String, Pai>();
-
-        @Override
-        public void cadastrarPai(Pai pai) {
-            System.out.println("Pai criado com sucesso");
-            bancoDeDados.put(pai.getEmail().getEndereco(), pai);
-        }
-
-        @Override
-        public Pai buscarPaiPorEmail(Email enderecoEmailPai) throws PaiNaoCadastradoException {
-            if (bancoDeDados.containsKey(enderecoEmailPai.getEndereco())) {
-                return bancoDeDados.get(enderecoEmailPai.getEndereco());
-            } else throw new PaiNaoCadastradoException("Não existe um pai cadastrado para esse e-mail");
-        }
-
-        @Override
-        public boolean verificarCadastroDeEmail(Email email) throws PaiNaoCadastradoException {
-            return bancoDeDados.containsKey(email.getEndereco());
-        }
-    };
 
     public Pai criarPai() {
         Pai pai = new Pai("Raphael Inacio", new Email("contato.raphaelinacio@gmail.com"));
@@ -119,8 +47,9 @@ public class DataBuilder {
 
     public void iniciarEscopoGlobal() {
         atividadeGlobal = criarAtividadeSistema();
+        rotinaGlobal = criarRotinaSistema();
         paiGlobal = criarPaiComFilho();
-        rotinaGlobal = criarRotina();
+        rotinaGlobal = criarRotinaSistema();
         paiRepository.cadastrarPai(paiGlobal);
         atividadeRepository.criarAtividade(paiGlobal, atividadeGlobal);
         rotinaRepository.criarRotina(paiGlobal, rotinaGlobal);
@@ -144,8 +73,12 @@ public class DataBuilder {
         return new Recorrencia(TipoRecorrenciaEnum.DIARIA, new HorarioRecorrencia(LocalTime.now()), LocalDate.now());
     }
 
-    public Rotina criarRotina() {
+    public Rotina criarRotinaSistema() {
         return new Rotina(criarRecorrencia(), criarAtividadeSistema());
+    }
+
+    public Rotina criarRotinaPai() {
+        return new Rotina(criarRecorrencia(), criarAtividadeSistema(), TipoRotina.PAI);
     }
 
 }

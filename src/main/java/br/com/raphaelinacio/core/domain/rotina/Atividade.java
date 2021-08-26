@@ -10,7 +10,7 @@ public class Atividade {
     private String nome;
     private String titulo;
     private String descricao;
-    private TipoAtividade tipoAtividade;
+    private TipoRotina tipoRotina;
 
     public Atividade(String nome, String titulo, String descricao) {
 
@@ -30,32 +30,7 @@ public class Atividade {
         this.titulo = titulo;
         this.descricao = descricao;
         this.codigo = UUID.randomUUID();
-        this.tipoAtividade = TipoAtividade.SISTEMA;
-    }
-
-    public Atividade(String nome, String titulo, String descricao, TipoAtividade tipoAtividade) {
-
-        if (Objects.isNull(nome) || nome.length() == 0) {
-            throw new IllegalArgumentException("Nome não informado");
-        }
-
-        if (Objects.isNull(titulo) || titulo.length() == 0) {
-            throw new IllegalArgumentException("Titulo não informado");
-        }
-
-        if (Objects.isNull(descricao) || descricao.length() == 0) {
-            throw new IllegalArgumentException("Descrição não informada");
-        }
-
-        if (Objects.isNull(tipoAtividade)) {
-            throw new IllegalArgumentException("Descrição não informada");
-        }
-
-        this.nome = nome;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.codigo = UUID.randomUUID();
-        this.tipoAtividade = tipoAtividade;
+        this.tipoRotina = TipoRotina.SISTEMA;
     }
 
     public UUID getCodigo() {
@@ -74,7 +49,7 @@ public class Atividade {
         return descricao;
     }
 
-    public TipoAtividade getTipoAtividade() {
-        return tipoAtividade;
+    public TipoRotina getTipoAtividade() {
+        return tipoRotina;
     }
 }

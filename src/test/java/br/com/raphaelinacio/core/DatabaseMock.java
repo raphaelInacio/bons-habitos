@@ -13,7 +13,7 @@ public class DatabaseMock {
 
     public static Map<UUID, Atividade> repositorioDeAtividades = new HashMap<>();
     public static Map<UUID, Rotina> repositorioDeRotinas = new HashMap<>();
-    public static Map<String, Pai> repositorioDePais = new HashMap<String, Pai>();
+    public static Map<String, Pai> repositorioDePais = new HashMap<>();
 
     public static RotinaRepository rotinaRepository = new RotinaRepository() {
 
@@ -35,16 +35,32 @@ public class DatabaseMock {
         }
 
         @Override
+        public Rotina buscarMinhaRotina(Pai pai, UUID codigoRotina) throws RotinaNaoCadastradaException {
+            Pai paiEncontrado = repositorioDePais.get(pai.getEmail().getEndereco());
+            return paiEncontrado.minhaRotina()
+                    .stream()
+                    .filter(minhaRotina -> minhaRotina.getCodigo().equals(codigoRotina))
+                    .findFirst()
+                    .orElseThrow(() -> new RotinaNaoCadastradaException("Não existe essa rotina"));
+        }
+
+        @Override
         public Rotina buscarRotina(UUID codigoRotina) throws RotinaNaoCadastradaException {
             if (repositorioDeRotinas.containsKey(codigoRotina))
                 return repositorioDeRotinas.get(codigoRotina);
-
             throw new RotinaNaoCadastradaException("Rotina não cadastrada");
         }
 
         @Override
         public void associarRotina(Pai pai, Rotina rotina) throws RotinaNaoCadastradaException {
+            if (!repositorioDeRotinas.containsKey(rotina.getCodigo()))
+                throw new RotinaNaoCadastradaException("Rotina não cadastrada");
             Rotina rotinaEncontrada = this.buscarRotina(rotina.getCodigo());
+        }
+
+        @Override
+        public void registrarParticipacao(Rotina rotina) {
+            repositorioDeRotinas.put(rotina.getCodigo(), rotina);
         }
 
     };

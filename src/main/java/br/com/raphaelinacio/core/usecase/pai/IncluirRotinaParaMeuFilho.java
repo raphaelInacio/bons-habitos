@@ -22,6 +22,8 @@ public class IncluirRotinaParaMeuFilho {
 
         Rotina rotina = rotinaRepository.buscarRotina(codigoRotina);
 
+        rotina.registrarParticipacaoDiaria();
+
         rotinaRepository.associarRotina(pai, rotina);
     }
 

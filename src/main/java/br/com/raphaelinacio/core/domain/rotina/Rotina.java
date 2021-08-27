@@ -45,9 +45,12 @@ public class Rotina {
     }
 
     public void registrarParticipacaoDiaria() {
-        this.historicoDeParticipacoes.stream().filter(Rotina::temMesmaData).findFirst().ifPresent(historico -> {
-            throw new IllegalStateException("Já existe um registro para a data de hoje" + historico.momento.format(DateTimeFormatter.BASIC_ISO_DATE));
-        });
+        this.historicoDeParticipacoes.stream()
+                .filter(Rotina::temMesmaData)
+                .findFirst()
+                .ifPresent(historico -> {
+                    throw new IllegalStateException("Já existe um registro para a data de hoje" + historico.momento.format(DateTimeFormatter.BASIC_ISO_DATE));
+                });
         historicoDeParticipacoes.add(new Historico());
     }
 

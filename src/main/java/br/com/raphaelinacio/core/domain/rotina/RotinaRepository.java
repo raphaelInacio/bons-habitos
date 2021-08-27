@@ -10,7 +10,11 @@ public interface RotinaRepository {
 
     List<Rotina> buscarMinhasRotinas(Pai pai);
 
+    Rotina buscarMinhaRotina(Pai pai, UUID codigoRotina) throws RotinaNaoCadastradaException;
+
     Rotina buscarRotina(UUID codigoRotina) throws RotinaNaoCadastradaException;
 
     void associarRotina(Pai pai, Rotina rotina) throws RotinaNaoCadastradaException;
+
+    void registrarParticipacao(Rotina rotina);
 }

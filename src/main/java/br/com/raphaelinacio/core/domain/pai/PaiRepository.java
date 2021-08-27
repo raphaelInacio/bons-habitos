@@ -6,4 +6,5 @@ public interface PaiRepository {
     Pai buscarPaiPorEmail(Email email) throws PaiNaoCadastradoException;
 
     boolean verificarCadastroDeEmail(Email email) throws PaiNaoCadastradoException;
+
 }

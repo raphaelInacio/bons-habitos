@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Filho {
     private String nome;
+
     private LocalDate dataDeNascimento;
 
     public Filho(String nome, LocalDate dataDeNascimento) {
@@ -35,5 +36,9 @@ public class Filho {
 
     public String getNome() {
         return nome;
+    }
+
+    public LocalDate getDataDeNascimento() {
+        return dataDeNascimento;
     }
 }

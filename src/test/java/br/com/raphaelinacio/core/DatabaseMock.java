@@ -26,6 +26,11 @@ public class DatabaseMock {
         }
 
         @Override
+        public void criarRotinaDeSistema(Rotina rotina) {
+            repositorioDeRotinas.put(rotina.getCodigo(), rotina);
+        }
+
+        @Override
         public List<Rotina> buscarMinhasRotinas(Pai pai) {
             Pai paiEncontrado = repositorioDePais.get(pai.getEmail().getEndereco());
             return paiEncontrado.minhaRotina()
@@ -61,6 +66,19 @@ public class DatabaseMock {
         @Override
         public void registrarParticipacao(Rotina rotina) {
             repositorioDeRotinas.put(rotina.getCodigo(), rotina);
+        }
+
+        @Override
+        public List<Rotina> buscarRotinasPorTipo(TipoRotina tipoRotina) {
+            List<Rotina> rotinasEncontradas = new ArrayList<>();
+
+            repositorioDeRotinas.forEach((uuid, rotina) -> {
+                if (rotina.getTipoRotina().equals(tipoRotina)) {
+                    rotinasEncontradas.add(rotina);
+                }
+            });
+
+            return rotinasEncontradas;
         }
 
     };

@@ -50,6 +50,7 @@ public class DataBuilder extends DatabaseMock {
         rotinaGlobal = criarRotinaSistema();
         paiGlobal = criarPaiComFilho();
         rotinaGlobal = criarRotinaSistema();
+        rotinaRepository.criarRotinaDeSistema(criarRotinaSistema());
         paiRepository.cadastrarPai(paiGlobal);
         atividadeRepository.criarAtividade(paiGlobal, atividadeGlobal);
         rotinaRepository.criarRotina(paiGlobal, rotinaGlobal);

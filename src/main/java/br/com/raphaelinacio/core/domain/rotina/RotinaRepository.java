@@ -8,6 +8,8 @@ import java.util.UUID;
 public interface RotinaRepository {
     void criarRotina(Pai pai, Rotina rotina);
 
+    void criarRotinaDeSistema(Rotina rotina);
+
     List<Rotina> buscarMinhasRotinas(Pai pai);
 
     Rotina buscarMinhaRotina(Pai pai, UUID codigoRotina) throws RotinaNaoCadastradaException;
@@ -17,4 +19,6 @@ public interface RotinaRepository {
     void associarRotina(Pai pai, Rotina rotina) throws RotinaNaoCadastradaException;
 
     void registrarParticipacao(Rotina rotina);
+
+    List<Rotina> buscarRotinasPorTipo(TipoRotina tipoRotina);
 }

@@ -2,8 +2,6 @@ package br.com.raphaelinacio.core.usecase.pai;
 
 import br.com.raphaelinacio.core.domain.pai.*;
 
-import java.time.LocalDate;
-
 public class CadastrarPaiNoSistema {
 
     private final PaiRepository paiRepository;
@@ -12,18 +10,17 @@ public class CadastrarPaiNoSistema {
         this.paiRepository = paiRepository;
     }
 
-    public void executar(String nomeDoPai, String enderecoEmailPai, String nomeFilho, LocalDate dataNascimentoFilho)
-            throws CadastroPaiException, PaiNaoCadastradoException {
+    public void executar(CadastroPaiDTO cadastroPaiDTO) throws CadastroPaiException, PaiNaoCadastradoException {
 
-        var jaExisteCadastro = paiRepository.verificarCadastroDeEmail(new Email(enderecoEmailPai));
+        var jaExisteCadastro = paiRepository.verificarCadastroDeEmail(new Email(cadastroPaiDTO.getEnderecoEmailPai()));
 
         if (jaExisteCadastro) {
             throw new CadastroPaiException("Já existe um cadastro de PAI para esse e-mail");
         }
 
-        var pai = new Pai(nomeDoPai, new Email(enderecoEmailPai));
+        var pai = new Pai(cadastroPaiDTO.getNomeDoPai(), new Email(cadastroPaiDTO.getEnderecoEmailPai()));
 
-        pai.incluirFilho(new Filho(nomeFilho, dataNascimentoFilho));
+        pai.incluirFilho(new Filho(cadastroPaiDTO.getNomeFilho(), cadastroPaiDTO.getDataNascimentoFilho()));
 
         paiRepository.cadastrarPai(pai);
     }

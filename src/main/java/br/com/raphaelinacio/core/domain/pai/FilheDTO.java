@@ -18,4 +18,7 @@ public class FilheDTO {
         this.nome = filho.getNome();
         this.dataDeNascimento = filho.getDataDeNascimento();
     }
+
+    public FilheDTO() {
+    }
 }

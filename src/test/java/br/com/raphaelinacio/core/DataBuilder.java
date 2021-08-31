@@ -1,11 +1,13 @@
 package br.com.raphaelinacio.core;
 
-import br.com.raphaelinacio.core.domain.pai.*;
+import br.com.raphaelinacio.core.domain.pai.Email;
+import br.com.raphaelinacio.core.domain.pai.Filho;
+import br.com.raphaelinacio.core.domain.pai.Pai;
 import br.com.raphaelinacio.core.domain.rotina.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.List;
 
 public class DataBuilder extends DatabaseMock {
 
@@ -80,6 +82,10 @@ public class DataBuilder extends DatabaseMock {
 
     public Rotina criarRotinaPai() {
         return new Rotina(criarRecorrencia(), criarAtividadeSistema(), TipoRotina.PAI);
+    }
+
+    public RotinaDTO criarRotinaDTO() {
+        return new RotinaDTO(criarAtividadeDTO(), TipoRecorrenciaEnum.MENSAL.name(), LocalTime.now());
     }
 
 }

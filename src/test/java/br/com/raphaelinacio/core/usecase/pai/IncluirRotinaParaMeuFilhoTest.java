@@ -1,8 +1,7 @@
 package br.com.raphaelinacio.core.usecase.pai;
 
 import br.com.raphaelinacio.core.DataBuilder;
-import br.com.raphaelinacio.core.domain.pai.*;
-import br.com.raphaelinacio.core.domain.rotina.AtividadeNaoCadastradaException;
+import br.com.raphaelinacio.core.domain.pai.PaiNaoCadastradoException;
 import br.com.raphaelinacio.core.domain.rotina.RotinaNaoCadastradaException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

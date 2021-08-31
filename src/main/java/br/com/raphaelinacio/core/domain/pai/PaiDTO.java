@@ -17,6 +17,9 @@ public class PaiDTO {
         this.rotinas = RotinaDTO.converte(pai.minhaRotina());
     }
 
+    public PaiDTO() {
+    }
+
     public String getEmail() {
         return email;
     }

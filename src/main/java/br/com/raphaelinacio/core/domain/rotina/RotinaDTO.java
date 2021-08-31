@@ -41,5 +41,16 @@ public class RotinaDTO {
                 }).collect(Collectors.toList());
     }
 
+    public AtividadeDTO getAtividadeDTO() {
+        return atividadeDTO;
+    }
+
+    public String getTipoRecorrencia() {
+        return tipoRecorrencia;
+    }
+
+    public LocalTime getHorarioRecorrencia() {
+        return horarioRecorrencia;
+    }
 
 }

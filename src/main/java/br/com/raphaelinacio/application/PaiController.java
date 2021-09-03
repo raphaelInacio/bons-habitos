@@ -3,15 +3,13 @@ package br.com.raphaelinacio.application;
 import br.com.raphaelinacio.core.domain.pai.CadastroPaiDTO;
 import br.com.raphaelinacio.core.domain.pai.PaiDTO;
 import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
-import br.com.raphaelinacio.core.usecase.pai.BuscarMinhasInformacoes;
-import br.com.raphaelinacio.core.usecase.pai.CadastrarPaiNoSistema;
-import br.com.raphaelinacio.core.usecase.pai.CriarNovaRotina;
-import br.com.raphaelinacio.core.usecase.pai.RegistrarParticipacao;
+import br.com.raphaelinacio.core.usecase.pai.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -30,6 +28,9 @@ public class PaiController {
 
     @Autowired
     private RegistrarParticipacao registrarParticipacao;
+
+    @Autowired
+    private ConsultarMinhasRotinas consultarMinhasRotinas;
 
     @PostMapping
     public ResponseEntity<Void> cadastrarPaiNoSistema(@RequestBody CadastroPaiDTO cadastroPaiDTO) {
@@ -53,6 +54,12 @@ public class PaiController {
     public ResponseEntity<Void> registarParticipacao(@PathVariable("email") String enderecoEmailPai, @PathVariable("codigoRotina") UUID codigoRotina) {
         registrarParticipacao.executar(enderecoEmailPai, codigoRotina);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{email}/rotinas")
+    public ResponseEntity<List<RotinaDTO>> buscarMinasRotinas(@PathVariable("email") String enderecoEmailPai) {
+        List<RotinaDTO> minhasRotinas = consultarMinhasRotinas.executar(enderecoEmailPai);
+        return ResponseEntity.ok(minhasRotinas);
     }
 }
 

@@ -8,6 +8,7 @@ import br.com.raphaelinacio.core.domain.rotina.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 public class DataBuilder extends DatabaseMock {
 
@@ -85,7 +86,7 @@ public class DataBuilder extends DatabaseMock {
     }
 
     public RotinaDTO criarRotinaDTO() {
-        return new RotinaDTO(criarAtividadeDTO(), TipoRecorrenciaEnum.MENSAL.name(), LocalTime.now());
+        return new RotinaDTO(criarAtividadeDTO(), TipoRecorrenciaEnum.MENSAL.name(), LocalTime.now(), UUID.randomUUID());
     }
 
 }

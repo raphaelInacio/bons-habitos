@@ -12,12 +12,11 @@ public class Rotina {
     private Recorrencia recorrencia;
     private Atividade atividade;
     private TipoRotina tipoRotina;
+    private List<Historico> historicoDeParticipacoes = new ArrayList<>();
 
     public List<Historico> verHistoricoDeParticipacoes() {
         return historicoDeParticipacoes;
     }
-
-    private List<Historico> historicoDeParticipacoes = new ArrayList<>();
 
     public Rotina(Recorrencia recorrencia, Atividade atividade) {
         this.recorrencia = recorrencia;

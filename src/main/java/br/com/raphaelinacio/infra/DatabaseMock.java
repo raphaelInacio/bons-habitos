@@ -6,17 +6,16 @@ import br.com.raphaelinacio.core.domain.pai.PaiNaoCadastradoException;
 import br.com.raphaelinacio.core.domain.pai.PaiRepository;
 import br.com.raphaelinacio.core.domain.rotina.*;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Component
+@Repository
 public class DatabaseMock {
-
-    public static Map<UUID, Atividade> repositorioDeAtividades = new HashMap<>();
-    public static Map<UUID, Rotina> repositorioDeRotinas = new HashMap<>();
-    public static Map<String, Pai> repositorioDePais = new HashMap<>();
-    public static RotinaRepository rotinaRepository = new RotinaRepository() {
+    public Map<UUID, Rotina> repositorioDeRotinas = new HashMap<>();
+    public Map<String, Pai> repositorioDePais = new HashMap<>();
+    public RotinaRepository rotinaRepository = new RotinaRepository() {
 
 
         @Override
@@ -83,32 +82,7 @@ public class DatabaseMock {
         }
 
     };
-
-    public static AtividadeRepository atividadeRepository = new AtividadeRepository() {
-
-
-        @Override
-        public Atividade buscarAtividade(UUID codigoAtividade) throws AtividadeNaoCadastradaException {
-            if (repositorioDeAtividades.containsKey(codigoAtividade)) {
-                return repositorioDeAtividades.get(codigoAtividade);
-            }
-            throw new AtividadeNaoCadastradaException("Não existe atividade cadastrada com esse ID");
-        }
-
-        @Override
-        public void criarAtividade(Pai pai, Atividade atividade) {
-            repositorioDeAtividades.put(atividade.getCodigo(), atividade);
-        }
-
-        @Override
-        public void associarAtividade(Pai pai, Atividade atividade) {
-            repositorioDeAtividades.put(atividade.getCodigo(), atividade);
-        }
-    };
-
-    public static PaiRepository paiRepository = new PaiRepository() {
-
-
+    public PaiRepository paiRepository = new PaiRepository() {
         @Override
         public void cadastrarPai(Pai pai) {
             System.out.println("Pai criado com sucesso");
@@ -125,6 +99,11 @@ public class DatabaseMock {
         @Override
         public boolean verificarCadastroDeEmail(Email email) throws PaiNaoCadastradoException {
             return repositorioDePais.containsKey(email.getEndereco());
+        }
+
+        @Override
+        public void removerCadastro(Email email) {
+            repositorioDePais.remove(email.getEndereco());
         }
     };
 }

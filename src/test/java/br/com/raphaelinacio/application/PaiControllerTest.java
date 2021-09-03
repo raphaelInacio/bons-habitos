@@ -2,25 +2,22 @@ package br.com.raphaelinacio.application;
 
 import br.com.raphaelinacio.Application;
 import br.com.raphaelinacio.core.DataBuilder;
-import br.com.raphaelinacio.core.domain.pai.CadastroPaiDTO;
-import br.com.raphaelinacio.core.domain.pai.Pai;
-import br.com.raphaelinacio.core.domain.pai.PaiDTO;
+import br.com.raphaelinacio.core.domain.pai.*;
 import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
+import br.com.raphaelinacio.core.domain.rotina.RotinaRepository;
+import br.com.raphaelinacio.infra.DatabaseMock;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -37,12 +34,35 @@ public class PaiControllerTest extends DataBuilder {
     @Autowired
     ObjectMapper mapper;
 
+    @Autowired
+    private PaiRepository paiRepository;
+
+    @Autowired
+    private RotinaRepository rotinaRepository;
+
+    @BeforeEach
+    public void setup() {
+        Pai pai = criarPai();
+        paiRepository.removerCadastro(pai.getEmail());
+    }
+
+    private Pai criarPaiNoBanco() {
+        Pai pai = criarPaiComFilho();
+        paiRepository.cadastrarPai(pai);
+        return pai;
+    }
+
+    private Pai criarPaiComRotinaNoBanco() {
+        Pai pai = criarPaiComRotina();
+        paiRepository.cadastrarPai(pai);
+        rotinaRepository.criarRotina(pai, pai.minhaRotina().stream().findFirst().get());
+        return pai;
+    }
+
     @Test
-    @Order(1)
     void deveCadasrtarUmPaiNoSistema() throws Exception {
         Pai pai = criarPai();
-        CadastroPaiDTO cadastroPaiDTO = new CadastroPaiDTO(pai.getNome(), "raphael@gmail.com", "Raphinha", LocalDate.now());
-
+        CadastroPaiDTO cadastroPaiDTO = new CadastroPaiDTO(pai.getNome(), pai.getEmail().getEndereco(), "Raphinha", LocalDate.now());
         mvc.perform(MockMvcRequestBuilders.post("/v1/pais")
                 .content(mapper.writeValueAsString(cadastroPaiDTO))
                 .contentType(MediaType.APPLICATION_JSON))
@@ -53,10 +73,10 @@ public class PaiControllerTest extends DataBuilder {
     }
 
     @Test
-    @Order(2)
     void deveCriarUmaNovaRotina() throws Exception {
+        Pai pai = criarPaiNoBanco();
         RotinaDTO rotinaDTO = criarRotinaDTO();
-        mvc.perform(MockMvcRequestBuilders.post("/v1/pais/" + email.getEndereco() + "/rotinas")
+        mvc.perform(MockMvcRequestBuilders.post("/v1/pais/" + pai.getEmail().getEndereco() + "/rotinas")
                 .content(mapper.writeValueAsString(rotinaDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers
@@ -66,12 +86,11 @@ public class PaiControllerTest extends DataBuilder {
     }
 
     @Test
-    @Order(3)
     void deveRecuperarOsDadosDeUmPai() throws Exception {
-        Pai pai = criarPai();
-        mvc.perform(MockMvcRequestBuilders.get("/v1/pais/" + email.getEndereco())
+        Pai pai = criarPaiNoBanco();
+        mvc.perform(MockMvcRequestBuilders.get("/v1/pais/" + pai.getEmail().getEndereco())
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("email").value(email.getEndereco()))
+                .andExpect(MockMvcResultMatchers.jsonPath("email").value(pai.getEmail().getEndereco()))
                 .andExpect(MockMvcResultMatchers.jsonPath("nome").value(pai.getNome()))
                 .andExpect(MockMvcResultMatchers
                         .status()
@@ -80,24 +99,10 @@ public class PaiControllerTest extends DataBuilder {
     }
 
     @Test
-    @Order(4)
     void deveRegistrarParticipacaoEmUmaRotina() throws Exception {
-        UUID idRotina = UUID.randomUUID();
-
-        ResultActions resultActions = mvc.perform(MockMvcRequestBuilders.get("/v1/pais/" + email.getEndereco())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers
-                        .status()
-                        .isOk())
-                .andDo(print());
-
-        MvcResult result = resultActions.andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
-        PaiDTO response = mapper.readValue(contentAsString, PaiDTO.class);
-
-        RotinaDTO rotinaDTO = response.getRotinas().stream().findFirst().get();
-
-        mvc.perform(MockMvcRequestBuilders.post("/v1/pais/" + email.getEndereco() + "/rotinas/" + idRotina)
+        Pai pai = criarPaiComRotinaNoBanco();
+        UUID codigo = pai.minhaRotina().stream().findFirst().get().getCodigo();
+        mvc.perform(MockMvcRequestBuilders.post("/v1/pais/" + pai.getEmail().getEndereco() + "/rotinas/" + codigo)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers
                         .status()
@@ -106,18 +111,20 @@ public class PaiControllerTest extends DataBuilder {
     }
 
     @Test
-    void naoDevePermitirCadastroDePaisComMesmoEmail() throws Exception {
-        Pai pai = criarPai();
-        CadastroPaiDTO cadastroPaiDTO = new CadastroPaiDTO(pai.getNome(), pai.getEmail().getEndereco(), "Raphinha", LocalDate.now());
-
-        mvc.perform(MockMvcRequestBuilders.post("/v1/pais")
-                .content(mapper.writeValueAsString(cadastroPaiDTO))
+    void deveRetornarAsRotinasDeUmPai() throws Exception {
+        Pai pai = criarPaiComRotinaNoBanco();
+        mvc.perform(MockMvcRequestBuilders.get("/v1/pais/" + pai.getEmail().getEndereco() + "/rotinas")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers
                         .status()
-                        .isCreated())
+                        .isOk())
                 .andDo(print());
+    }
 
+    @Test
+    void naoDevePermitirCadastroDePaisComMesmoEmail() throws Exception {
+        Pai pai = criarPaiNoBanco();
+        CadastroPaiDTO cadastroPaiDTO = new CadastroPaiDTO(pai.getNome(), pai.getEmail().getEndereco(), "Raphinha", LocalDate.now());
         mvc.perform(MockMvcRequestBuilders.post("/v1/pais")
                 .content(mapper.writeValueAsString(cadastroPaiDTO))
                 .contentType(MediaType.APPLICATION_JSON))

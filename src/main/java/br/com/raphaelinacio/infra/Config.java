@@ -2,10 +2,7 @@ package br.com.raphaelinacio.infra;
 
 import br.com.raphaelinacio.core.domain.pai.PaiRepository;
 import br.com.raphaelinacio.core.domain.rotina.RotinaRepository;
-import br.com.raphaelinacio.core.usecase.pai.BuscarMinhasInformacoes;
-import br.com.raphaelinacio.core.usecase.pai.CadastrarPaiNoSistema;
-import br.com.raphaelinacio.core.usecase.pai.CriarNovaRotina;
-import br.com.raphaelinacio.core.usecase.pai.RegistrarParticipacao;
+import br.com.raphaelinacio.core.usecase.pai.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,6 +30,11 @@ public class Config extends DatabaseMock {
     }
 
     @Bean
+    public ConsultarMinhasRotinas consultarMinhasRotinas(PaiRepository paiRepository, RotinaRepository rotinaRepository) {
+        return new ConsultarMinhasRotinas(paiRepository, rotinaRepository);
+    }
+
+    @Bean
     public CriarNovaRotina criarNovaRotina(PaiRepository paiRepository, RotinaRepository rotinaRepository) {
         return new CriarNovaRotina(paiRepository, rotinaRepository);
     }
@@ -40,5 +42,10 @@ public class Config extends DatabaseMock {
     @Bean
     public RegistrarParticipacao registrarParticipacao(PaiRepository paiRepository, RotinaRepository rotinaRepository) {
         return new RegistrarParticipacao(paiRepository, rotinaRepository);
+    }
+
+    @Bean("mock-api")
+    public DatabaseMock databaseMock() {
+        return new DatabaseMock();
     }
 }

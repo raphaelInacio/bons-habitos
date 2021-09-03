@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 public class DatabaseMock {
 
-    public static Map<UUID, Atividade> repositorioDeAtividades = new HashMap<>();
-    public static Map<UUID, Rotina> repositorioDeRotinas = new HashMap<>();
-    public static Map<String, Pai> repositorioDePais = new HashMap<>();
+    public Map<UUID, Atividade> repositorioDeAtividades = new HashMap<>();
+    public Map<UUID, Rotina> repositorioDeRotinas = new HashMap<>();
+    public Map<String, Pai> repositorioDePais = new HashMap<>();
 
-    public static RotinaRepository rotinaRepository = new RotinaRepository() {
+    public RotinaRepository rotinaRepository = new RotinaRepository() {
 
 
         @Override
@@ -83,7 +83,7 @@ public class DatabaseMock {
 
     };
 
-    public static AtividadeRepository atividadeRepository = new AtividadeRepository() {
+    public AtividadeRepository atividadeRepository = new AtividadeRepository() {
 
 
         @Override
@@ -105,7 +105,7 @@ public class DatabaseMock {
         }
     };
 
-    public static PaiRepository paiRepository = new PaiRepository() {
+    public PaiRepository paiRepository = new PaiRepository() {
 
 
         @Override
@@ -124,6 +124,11 @@ public class DatabaseMock {
         @Override
         public boolean verificarCadastroDeEmail(Email email) throws PaiNaoCadastradoException {
             return repositorioDePais.containsKey(email.getEndereco());
+        }
+
+        @Override
+        public void removerCadastro(Email email) {
+
         }
     };
 }

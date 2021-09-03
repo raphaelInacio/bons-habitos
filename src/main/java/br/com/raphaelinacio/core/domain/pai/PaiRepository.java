@@ -7,4 +7,5 @@ public interface PaiRepository {
 
     boolean verificarCadastroDeEmail(Email email) throws PaiNaoCadastradoException;
 
+    void removerCadastro(Email email);
 }

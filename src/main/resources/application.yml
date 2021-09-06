@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: bons-habitos-service
+  cloud:
+    gcp:
+      datastore:
+        enabled: true
+        project-id: macro-scion-300810
+  main:
+    allow-bean-definition-overriding: true
+  server:
+    port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+      sla:
+        http:
+          server:
+            requests: 500ms, 1000ms, 2000ms, 4000ms
+      percentiles:
+        http:
+          server:
+            requests: 0.5, 0.9, 0.95, 0.99, 0.999
+  endpoint:
+    metrics:
+      enabled: false
+    prometheus:
+      enabled: true

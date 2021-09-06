@@ -1,4 +1,4 @@
-package br.com.raphaelinacio.application;
+package br.com.raphaelinacio.application.controller;
 
 import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
 import br.com.raphaelinacio.core.usecase.rotina.ConsultarRotinasDoSistema;

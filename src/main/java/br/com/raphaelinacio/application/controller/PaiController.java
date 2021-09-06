@@ -1,4 +1,4 @@
-package br.com.raphaelinacio.application;
+package br.com.raphaelinacio.application.controller;
 
 import br.com.raphaelinacio.core.domain.pai.CadastroPaiDTO;
 import br.com.raphaelinacio.core.domain.pai.PaiDTO;

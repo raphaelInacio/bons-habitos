@@ -2,10 +2,11 @@ package br.com.raphaelinacio.application;
 
 import br.com.raphaelinacio.Application;
 import br.com.raphaelinacio.core.DataBuilder;
-import br.com.raphaelinacio.core.domain.pai.*;
+import br.com.raphaelinacio.core.domain.pai.CadastroPaiDTO;
+import br.com.raphaelinacio.core.domain.pai.Pai;
+import br.com.raphaelinacio.core.domain.pai.PaiRepository;
 import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
 import br.com.raphaelinacio.core.domain.rotina.RotinaRepository;
-import br.com.raphaelinacio.infra.DatabaseMock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 

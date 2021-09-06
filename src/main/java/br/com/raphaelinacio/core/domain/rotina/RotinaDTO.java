@@ -20,7 +20,7 @@ public class RotinaDTO {
         this.codigo = codigo;
     }
 
-    public Rotina converterParaDominio() {
+    public Rotina converterParaRotinaPai() {
 
         Atividade atividade = atividadeDTO.converterParaDominio();
 
@@ -32,16 +32,30 @@ public class RotinaDTO {
         return new Rotina(recorrencia, atividade, TipoRotina.PAI);
     }
 
-    public static List<RotinaDTO> converte(List<Rotina> rotinas) {
+    public Rotina converterParaRotinaSistema() {
+
+        Atividade atividade = atividadeDTO.converterParaDominio();
+
+        Recorrencia recorrencia = new Recorrencia(
+                TipoRecorrenciaEnum.valueOf(tipoRecorrencia),
+                new HorarioRecorrencia(horarioRecorrencia),
+                LocalDate.now());
+
+        return new Rotina(recorrencia, atividade);
+    }
+
+    public static RotinaDTO converter(Rotina rotina) {
+        Atividade atividade = rotina.getAtividade();
+        Recorrencia recorrencia = rotina.getRecorrencia();
+        AtividadeDTO atividadeDTO = new AtividadeDTO(atividade.getNome(), atividade.getTitulo(), atividade.getDescricao());
+        RotinaDTO rotinaDTO = new RotinaDTO(atividadeDTO, recorrencia.getTipoRecorrencia().name(), recorrencia.getHorarioRecorrencia().getLocalTime(), rotina.getCodigo());
+        return rotinaDTO;
+    }
+
+    public static List<RotinaDTO> converter(List<Rotina> rotinas) {
         return rotinas.stream()
                 .filter(Objects::nonNull)
-                .map(rotina -> {
-                    Atividade atividade = rotina.getAtividade();
-                    Recorrencia recorrencia = rotina.getRecorrencia();
-                    AtividadeDTO atividadeDTO = new AtividadeDTO(atividade.getNome(), atividade.getTitulo(), atividade.getDescricao());
-                    RotinaDTO rotinaDTO = new RotinaDTO(atividadeDTO, recorrencia.getTipoRecorrencia().name(), recorrencia.getHorarioRecorrencia().getLocalTime(), rotina.getCodigo());
-                    return rotinaDTO;
-                }).collect(Collectors.toList());
+                .map(RotinaDTO::converter).collect(Collectors.toList());
     }
 
     public AtividadeDTO getAtividadeDTO() {

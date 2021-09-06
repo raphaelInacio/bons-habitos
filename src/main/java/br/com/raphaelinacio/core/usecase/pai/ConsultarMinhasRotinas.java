@@ -32,6 +32,6 @@ public class ConsultarMinhasRotinas {
             return Collections.emptyList();
         }
 
-        return RotinaDTO.converte(minhasRotinas);
+        return RotinaDTO.converter(minhasRotinas);
     }
 }

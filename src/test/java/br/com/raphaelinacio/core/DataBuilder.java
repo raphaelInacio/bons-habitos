@@ -88,5 +88,4 @@ public class DataBuilder extends DatabaseMock {
     public RotinaDTO criarRotinaDTO() {
         return new RotinaDTO(criarAtividadeDTO(), TipoRecorrenciaEnum.MENSAL.name(), LocalTime.now(), UUID.randomUUID());
     }
-
 }

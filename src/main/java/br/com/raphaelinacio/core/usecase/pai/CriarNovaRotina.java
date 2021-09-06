@@ -23,7 +23,7 @@ public class CriarNovaRotina {
 
         Pai pai = paiRepository.buscarPaiPorEmail(email);
 
-        Rotina rotina = rotinaDTO.converterParaDominio();
+        Rotina rotina = rotinaDTO.converterParaRotinaPai();
 
         rotinaRepository.criarRotina(pai, rotina);
     }

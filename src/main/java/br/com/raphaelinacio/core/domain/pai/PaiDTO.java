@@ -14,7 +14,7 @@ public class PaiDTO {
         this.nome = pai.getNome();
         this.email = pai.getEmail().getEndereco();
         this.filho = new FilheDTO(pai.meusFilhos().stream().findFirst().orElse(null));
-        this.rotinas = RotinaDTO.converte(pai.minhaRotina());
+        this.rotinas = RotinaDTO.converter(pai.minhaRotina());
     }
 
     public PaiDTO() {

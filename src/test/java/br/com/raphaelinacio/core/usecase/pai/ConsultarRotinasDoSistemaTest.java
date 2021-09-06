@@ -2,6 +2,7 @@ package br.com.raphaelinacio.core.usecase.pai;
 
 import br.com.raphaelinacio.core.DataBuilder;
 import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
+import br.com.raphaelinacio.core.usecase.rotina.ConsultarRotinasDoSistema;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

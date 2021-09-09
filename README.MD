@@ -3,8 +3,6 @@
 Pais podem escolher atividades para os seus filhos diários para os seus filhos, como também podem criar novos atividades
 ou escolher atividades de outras pessoas.
 
-Cada atividade possui uma descrição
-
 ### 
 Seu filho passa horas no celular ou no videogame e você não sabe mais o que fazer?
 
@@ -24,3 +22,17 @@ Tudo isso de forma fácil, intuitiva e divertida
 ### Quais os pilares para essa aplicação
 
 Os pilares para a conctrução dessa aplicação são TDD, Clean Architeture e DDD, SOLID e Design Patterns
+
+### Camada application
+
+- Cloud Datastore - Banco de Dados
+- AppEngine - Plataforma de execução
+- Cloud Trace - Tracing
+- Cloud Pub/Sub - Mensageria
+
+## Referencias de estudo
+ - Alura Curso de Clean Architecture
+ - Branas IO - Clean Code e Clean Architecture-
+ - Coursera - Building Scalable Java Microservices with spring boot and spring cloud
+
+

@@ -35,4 +35,10 @@ Os pilares para a conctrução dessa aplicação são TDD, Clean Architeture e D
  - Branas IO - Clean Code e Clean Architecture-
  - Coursera - Building Scalable Java Microservices with spring boot and spring cloud
 
+## Como rodar
+
+* ``https://habits-service-dot-macro-scion-300810.rj.r.appspot.com/v1/habits``
+*  ``gcloud app deploy  src/main/appengine/habits-service.yaml``
+*  ``docker build -t raphaelinacio/records-service .``
+* `` docker run --publish 8080:8080 -v ~/.config:/root/.config raphaelinacio/records-service``
 

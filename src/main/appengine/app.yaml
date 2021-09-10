@@ -1,11 +1,11 @@
 runtime: java11
 service: bons-habitos-service
-#runtime_config:
-#  jdk: openjdk11
-##env_variables:
-##  SPRING_PROFILES_ACTIVE: "gcp,mysql"
-#handlers:
-#  - url: /.*
-#    script: this field is required, but ignored
+
+#runtime: java11
+#instance_class: B4_1G
 #manual_scaling:
-#  instances: 1
+#  instances: 2
+#env_variables:
+#  SPRING_PROFILES_ACTIVE: cloud
+#  # REPLACE PROJECT_ID with your project ID!
+#  MESSAGES_ENDPOINT: https://guestbook-service-dot-PROJECT_ID.appspot.com/guestbookMessages

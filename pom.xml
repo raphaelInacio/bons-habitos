@@ -90,7 +90,7 @@
                 <version>2.4.0</version>
                 <configuration>
                     <projectId>GCLOUD_CONFIG</projectId>
-                    <version>accounts-service</version>
+<!--                    <version>bons-habitos-service</version>-->
                 </configuration>
             </plugin>
         </plugins>

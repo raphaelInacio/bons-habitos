@@ -37,8 +37,6 @@ Os pilares para a conctrução dessa aplicação são TDD, Clean Architeture e D
 
 ## Como rodar
 
-* ``https://habits-service-dot-macro-scion-300810.rj.r.appspot.com/v1/habits``
-*  ``gcloud app deploy  src/main/appengine/app.yaml``
-*  ``docker build -t raphaelinacio/records-service .``
-* `` docker run --publish 8080:8080 -v ~/.config:/root/.config raphaelinacio/records-service``
+* URL ``https://bons-habitos-service-dot-macro-scion-300810.rj.r.appspot.com]``
+* Deploy via GCLOUD ``gcloud app deploy  src/main/appengine/app.yaml``
 * Deploy app no appengine via mvn ``mvn clean package appengine:deploy``

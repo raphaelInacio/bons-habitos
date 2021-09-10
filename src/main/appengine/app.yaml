@@ -1,8 +1,5 @@
 runtime: java11
-service: bons-habitos-service
-
-#runtime: java11
-#instance_class: B4_1G
+instance_class: F1
 #manual_scaling:
 #  instances: 2
 #env_variables:

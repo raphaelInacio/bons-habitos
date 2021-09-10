@@ -90,7 +90,7 @@
                 <version>2.4.0</version>
                 <configuration>
                     <projectId>GCLOUD_CONFIG</projectId>
-                    <deploy.version>0.1.0</deploy.version>
+                    <deploy.version>1-0-snapshot</deploy.version>
                 </configuration>
             </plugin>
         </plugins>

@@ -1,4 +1,4 @@
-package br.com.raphaelinacio.core.domain.pai;
+package br.com.raphaelinacio.core.domain.pai.repository;
 
 public class PaiNaoCadastradoException extends RuntimeException {
     public PaiNaoCadastradoException(String message) {

@@ -1,4 +1,6 @@
-package br.com.raphaelinacio.core.domain.rotina;
+package br.com.raphaelinacio.core.domain.rotina.dto;
+
+import br.com.raphaelinacio.core.domain.rotina.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -1,9 +1,9 @@
 package br.com.raphaelinacio.core.usecase.pai;
 
 import br.com.raphaelinacio.core.DataBuilder;
-import br.com.raphaelinacio.core.domain.pai.CadastroPaiDTO;
-import br.com.raphaelinacio.core.domain.pai.CadastroPaiException;
-import br.com.raphaelinacio.core.domain.pai.PaiNaoCadastradoException;
+import br.com.raphaelinacio.core.domain.pai.dto.CadastroPaiDTO;
+import br.com.raphaelinacio.core.domain.pai.repository.CadastroPaiException;
+import br.com.raphaelinacio.core.domain.pai.repository.PaiNaoCadastradoException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -4,6 +4,8 @@ import br.com.raphaelinacio.core.domain.pai.Email;
 import br.com.raphaelinacio.core.domain.pai.Filho;
 import br.com.raphaelinacio.core.domain.pai.Pai;
 import br.com.raphaelinacio.core.domain.rotina.*;
+import br.com.raphaelinacio.core.domain.rotina.dto.AtividadeDTO;
+import br.com.raphaelinacio.core.domain.rotina.dto.RotinaDTO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

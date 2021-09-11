@@ -1,8 +1,8 @@
-package br.com.raphaelinacio.infra;
+package br.com.raphaelinacio.infra.config;
 
-import br.com.raphaelinacio.core.domain.pai.CadastroPaiException;
-import br.com.raphaelinacio.core.domain.pai.PaiNaoCadastradoException;
-import br.com.raphaelinacio.core.domain.rotina.RotinaNaoCadastradaException;
+import br.com.raphaelinacio.core.domain.pai.repository.CadastroPaiException;
+import br.com.raphaelinacio.core.domain.pai.repository.PaiNaoCadastradoException;
+import br.com.raphaelinacio.core.domain.rotina.exception.RotinaNaoCadastradaException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

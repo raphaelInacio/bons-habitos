@@ -2,9 +2,13 @@ package br.com.raphaelinacio.core;
 
 import br.com.raphaelinacio.core.domain.pai.Email;
 import br.com.raphaelinacio.core.domain.pai.Pai;
-import br.com.raphaelinacio.core.domain.pai.PaiNaoCadastradoException;
-import br.com.raphaelinacio.core.domain.pai.PaiRepository;
+import br.com.raphaelinacio.core.domain.pai.repository.PaiNaoCadastradoException;
+import br.com.raphaelinacio.core.domain.pai.exception.PaiRepository;
 import br.com.raphaelinacio.core.domain.rotina.*;
+import br.com.raphaelinacio.core.domain.rotina.exception.AtividadeNaoCadastradaException;
+import br.com.raphaelinacio.core.domain.rotina.exception.RotinaNaoCadastradaException;
+import br.com.raphaelinacio.core.domain.rotina.repository.AtividadeRepository;
+import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

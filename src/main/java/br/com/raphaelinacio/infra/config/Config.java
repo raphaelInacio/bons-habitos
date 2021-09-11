@@ -1,10 +1,11 @@
-package br.com.raphaelinacio.infra;
+package br.com.raphaelinacio.infra.config;
 
-import br.com.raphaelinacio.core.domain.pai.PaiRepository;
-import br.com.raphaelinacio.core.domain.rotina.RotinaRepository;
+import br.com.raphaelinacio.core.domain.pai.exception.PaiRepository;
+import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 import br.com.raphaelinacio.core.usecase.pai.*;
 import br.com.raphaelinacio.core.usecase.rotina.ConsultarRotinasDoSistema;
 import br.com.raphaelinacio.core.usecase.rotina.CriarRotinaSistema;
+import br.com.raphaelinacio.infra.repository.DatabaseMock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

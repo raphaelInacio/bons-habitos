@@ -3,7 +3,7 @@ package br.com.raphaelinacio.application;
 import br.com.raphaelinacio.Application;
 import br.com.raphaelinacio.core.DataBuilder;
 import br.com.raphaelinacio.core.domain.rotina.Rotina;
-import br.com.raphaelinacio.core.domain.rotina.RotinaRepository;
+import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

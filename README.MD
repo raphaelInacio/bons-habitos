@@ -29,6 +29,7 @@ Os pilares para a conctrução dessa aplicação são TDD, Clean Architeture e D
 - AppEngine - Plataforma de execução
 - Cloud Trace - Tracing
 - Cloud Pub/Sub - Mensageria
+- Cloud Storage para armazenamento de imagens
 
 ## Referencias de estudo
  - Alura Curso de Clean Architecture
@@ -37,6 +38,6 @@ Os pilares para a conctrução dessa aplicação são TDD, Clean Architeture e D
 
 ## Como rodar
 
-* URL ``https://bons-habitos-service-dot-macro-scion-300810.rj.r.appspot.com]``
+* URL ``https://macro-scion-300810.rj.r.appspot.com``
 * Deploy via GCLOUD ``gcloud app deploy  src/main/appengine/app.yaml``
 * Deploy app no appengine via mvn ``mvn clean package appengine:deploy``

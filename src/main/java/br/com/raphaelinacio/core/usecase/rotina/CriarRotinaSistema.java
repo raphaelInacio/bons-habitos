@@ -1,7 +1,7 @@
 package br.com.raphaelinacio.core.usecase.rotina;
 
-import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
-import br.com.raphaelinacio.core.domain.rotina.RotinaRepository;
+import br.com.raphaelinacio.core.domain.rotina.dto.RotinaDTO;
+import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 
 public class CriarRotinaSistema {
     private RotinaRepository rotinaRepository;

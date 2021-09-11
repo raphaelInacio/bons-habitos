@@ -1,4 +1,8 @@
-package br.com.raphaelinacio.core.domain.pai;
+package br.com.raphaelinacio.core.domain.pai.exception;
+
+import br.com.raphaelinacio.core.domain.pai.Email;
+import br.com.raphaelinacio.core.domain.pai.Pai;
+import br.com.raphaelinacio.core.domain.pai.repository.PaiNaoCadastradoException;
 
 public interface PaiRepository {
     void cadastrarPai(Pai pai);

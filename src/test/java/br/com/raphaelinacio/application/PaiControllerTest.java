@@ -2,11 +2,11 @@ package br.com.raphaelinacio.application;
 
 import br.com.raphaelinacio.Application;
 import br.com.raphaelinacio.core.DataBuilder;
-import br.com.raphaelinacio.core.domain.pai.CadastroPaiDTO;
+import br.com.raphaelinacio.core.domain.pai.dto.CadastroPaiDTO;
 import br.com.raphaelinacio.core.domain.pai.Pai;
-import br.com.raphaelinacio.core.domain.pai.PaiRepository;
-import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
-import br.com.raphaelinacio.core.domain.rotina.RotinaRepository;
+import br.com.raphaelinacio.core.domain.pai.exception.PaiRepository;
+import br.com.raphaelinacio.core.domain.rotina.dto.RotinaDTO;
+import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

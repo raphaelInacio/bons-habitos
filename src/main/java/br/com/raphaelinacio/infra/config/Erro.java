@@ -1,4 +1,4 @@
-package br.com.raphaelinacio.infra;
+package br.com.raphaelinacio.infra.config;
 
 public class Erro {
     public String getMensagem() {

@@ -1,6 +1,6 @@
 package br.com.raphaelinacio.application.controller;
 
-import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
+import br.com.raphaelinacio.core.domain.rotina.dto.RotinaDTO;
 import br.com.raphaelinacio.core.usecase.rotina.ConsultarRotinasDoSistema;
 import br.com.raphaelinacio.core.usecase.rotina.CriarRotinaSistema;
 import org.springframework.beans.factory.annotation.Autowired;

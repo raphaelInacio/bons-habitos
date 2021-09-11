@@ -1,8 +1,8 @@
 package br.com.raphaelinacio.core.usecase.rotina;
 
 import br.com.raphaelinacio.core.domain.rotina.Rotina;
-import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
-import br.com.raphaelinacio.core.domain.rotina.RotinaRepository;
+import br.com.raphaelinacio.core.domain.rotina.dto.RotinaDTO;
+import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 import br.com.raphaelinacio.core.domain.rotina.TipoRotina;
 
 import java.util.List;

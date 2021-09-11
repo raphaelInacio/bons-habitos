@@ -1,6 +1,10 @@
 package br.com.raphaelinacio.core.usecase.pai;
 
 import br.com.raphaelinacio.core.domain.pai.*;
+import br.com.raphaelinacio.core.domain.pai.dto.CadastroPaiDTO;
+import br.com.raphaelinacio.core.domain.pai.exception.PaiRepository;
+import br.com.raphaelinacio.core.domain.pai.repository.CadastroPaiException;
+import br.com.raphaelinacio.core.domain.pai.repository.PaiNaoCadastradoException;
 
 public class CadastrarPaiNoSistema {
 

@@ -1,4 +1,6 @@
-package br.com.raphaelinacio.core.domain.rotina;
+package br.com.raphaelinacio.core.domain.rotina.dto;
+
+import br.com.raphaelinacio.core.domain.rotina.Atividade;
 
 public class AtividadeDTO {
     private String nome;

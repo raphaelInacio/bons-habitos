@@ -1,4 +1,4 @@
-package br.com.raphaelinacio.core.domain.pai;
+package br.com.raphaelinacio.core.domain.pai.dto;
 
 import java.time.LocalDate;
 

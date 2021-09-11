@@ -2,11 +2,11 @@ package br.com.raphaelinacio.core.usecase.pai;
 
 import br.com.raphaelinacio.core.domain.pai.Email;
 import br.com.raphaelinacio.core.domain.pai.Pai;
-import br.com.raphaelinacio.core.domain.pai.PaiNaoCadastradoException;
-import br.com.raphaelinacio.core.domain.pai.PaiRepository;
+import br.com.raphaelinacio.core.domain.pai.repository.PaiNaoCadastradoException;
+import br.com.raphaelinacio.core.domain.pai.exception.PaiRepository;
 import br.com.raphaelinacio.core.domain.rotina.Rotina;
-import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
-import br.com.raphaelinacio.core.domain.rotina.RotinaRepository;
+import br.com.raphaelinacio.core.domain.rotina.dto.RotinaDTO;
+import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 
 public class CriarNovaRotina {
 

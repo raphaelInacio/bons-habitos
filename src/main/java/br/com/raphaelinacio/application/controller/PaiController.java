@@ -1,8 +1,8 @@
 package br.com.raphaelinacio.application.controller;
 
-import br.com.raphaelinacio.core.domain.pai.CadastroPaiDTO;
-import br.com.raphaelinacio.core.domain.pai.PaiDTO;
-import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
+import br.com.raphaelinacio.core.domain.pai.dto.CadastroPaiDTO;
+import br.com.raphaelinacio.core.domain.pai.dto.PaiDTO;
+import br.com.raphaelinacio.core.domain.rotina.dto.RotinaDTO;
 import br.com.raphaelinacio.core.usecase.pai.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

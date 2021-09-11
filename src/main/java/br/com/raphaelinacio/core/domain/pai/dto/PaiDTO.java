@@ -1,6 +1,7 @@
-package br.com.raphaelinacio.core.domain.pai;
+package br.com.raphaelinacio.core.domain.pai.dto;
 
-import br.com.raphaelinacio.core.domain.rotina.RotinaDTO;
+import br.com.raphaelinacio.core.domain.pai.Pai;
+import br.com.raphaelinacio.core.domain.rotina.dto.RotinaDTO;
 
 import java.util.List;
 

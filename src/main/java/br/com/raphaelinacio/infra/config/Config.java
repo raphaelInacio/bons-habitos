@@ -6,6 +6,8 @@ import br.com.raphaelinacio.core.usecase.pai.*;
 import br.com.raphaelinacio.core.usecase.rotina.ConsultarRotinasDoSistema;
 import br.com.raphaelinacio.core.usecase.rotina.CriarRotinaSistema;
 import br.com.raphaelinacio.infra.repository.DatabaseMock;
+import br.com.raphaelinacio.infra.repository.PaiRepositoryDataStoreImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,18 +19,23 @@ public class Config extends DatabaseMock {
         return paiRepository;
     }
 
+    @Bean("dataStoreRepository")
+    public PaiRepository paiRepositoryDataStore() {
+        return new PaiRepositoryDataStoreImpl();
+    }
+
     @Bean
     public RotinaRepository rotinaRepository() {
         return rotinaRepository;
     }
 
     @Bean
-    public CadastrarPaiNoSistema cadastrarPaiNoSistema(PaiRepository paiRepository) {
+    public CadastrarPaiNoSistema cadastrarPaiNoSistema(@Qualifier("dataStoreRepository") PaiRepository paiRepository) {
         return new CadastrarPaiNoSistema(paiRepository);
     }
 
     @Bean
-    public BuscarMinhasInformacoes buscarMinhasInformacoes(PaiRepository paiRepository) {
+    public BuscarMinhasInformacoes buscarMinhasInformacoes(@Qualifier("dataStoreRepository") PaiRepository paiRepository) {
         return new BuscarMinhasInformacoes(paiRepository);
     }
 

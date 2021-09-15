@@ -20,4 +20,5 @@ public class Pai {
     private List<Filho> filhos;
 
     private List<Long> rotinas;
+
 }

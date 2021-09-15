@@ -8,13 +8,13 @@ import java.util.List;
 public class PaiDTO {
     private String email;
     private String nome;
-    private FilheDTO filho;
+    private List<FilheDTO> filhos;
     private List<RotinaDTO> rotinas;
 
     public PaiDTO(Pai pai) {
         this.nome = pai.getNome();
         this.email = pai.getEmail().getEndereco();
-        this.filho = new FilheDTO(pai.meusFilhos().stream().findFirst().orElse(null));
+        this.filhos = FilheDTO.converter(pai.meusFilhos());
         this.rotinas = RotinaDTO.converter(pai.minhaRotina());
     }
 
@@ -29,11 +29,11 @@ public class PaiDTO {
         return nome;
     }
 
-    public FilheDTO getFilho() {
-        return filho;
-    }
-
     public List<RotinaDTO> getRotinas() {
         return rotinas;
+    }
+
+    public List<FilheDTO> getFilhos() {
+        return filhos;
     }
 }

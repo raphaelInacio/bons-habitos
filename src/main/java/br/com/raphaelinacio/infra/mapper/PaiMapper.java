@@ -1,5 +1,6 @@
 package br.com.raphaelinacio.infra.mapper;
 
+import br.com.raphaelinacio.core.domain.pai.Email;
 import br.com.raphaelinacio.infra.database.Filho;
 import br.com.raphaelinacio.infra.database.Pai;
 import org.springframework.stereotype.Component;
@@ -32,5 +33,15 @@ public class PaiMapper {
         entidadeFilho.setNome(filho.getNome());
         entidadeFilho.setDataNacimento(filho.getDataDeNascimento());
         return entidadeFilho;
+    }
+
+    public br.com.raphaelinacio.core.domain.pai.Pai paraDominio(Pai pai) {
+        var dominioPai = new br.com.raphaelinacio.core.domain.pai.Pai(pai.getNome(), new Email(pai.getEmail()));
+        pai.getFilhos().stream().forEach(filho -> dominioPai.incluirFilho(paraDominio(filho)));
+        return dominioPai;
+    }
+
+    private br.com.raphaelinacio.core.domain.pai.Filho paraDominio(Filho filho) {
+        return new br.com.raphaelinacio.core.domain.pai.Filho(filho.getNome(), filho.getDataNacimento());
     }
 }

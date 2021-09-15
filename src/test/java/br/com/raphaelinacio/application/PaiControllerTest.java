@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -34,6 +35,7 @@ public class PaiControllerTest extends DataBuilder {
     ObjectMapper mapper;
 
     @Autowired
+    @Qualifier("dataStoreRepository")
     private PaiRepository paiRepository;
 
     @Autowired
@@ -59,7 +61,7 @@ public class PaiControllerTest extends DataBuilder {
     }
 
     @Test
-    void deveCadasrtarUmPaiNoSistema() throws Exception {
+    void deveCadastrarUmPaiNoSistema() throws Exception {
         Pai pai = criarPai();
         CadastroPaiDTO cadastroPaiDTO = new CadastroPaiDTO(pai.getNome(), pai.getEmail().getEndereco(), "Raphinha", LocalDate.now());
         mvc.perform(MockMvcRequestBuilders.post("/v1/pais")

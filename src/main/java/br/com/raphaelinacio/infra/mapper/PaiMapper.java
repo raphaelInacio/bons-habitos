@@ -1,8 +1,8 @@
 package br.com.raphaelinacio.infra.mapper;
 
 import br.com.raphaelinacio.core.domain.pai.Email;
-import br.com.raphaelinacio.infra.database.Filho;
-import br.com.raphaelinacio.infra.database.Pai;
+import br.com.raphaelinacio.infra.database.FilhoEntity;
+import br.com.raphaelinacio.infra.database.PaiEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,37 +11,37 @@ import java.util.stream.Collectors;
 @Component
 public class PaiMapper {
 
-    public Pai paraEntidade(br.com.raphaelinacio.core.domain.pai.Pai pai) {
+    public PaiEntity paraEntidade(br.com.raphaelinacio.core.domain.pai.Pai pai) {
 
-        Pai entidadePai = new Pai();
-        entidadePai.setEmail(pai.getEmail().getEndereco());
-        entidadePai.setNome(pai.getNome());
+        PaiEntity entidadePaiEntity = new PaiEntity();
+        entidadePaiEntity.setEmail(pai.getEmail().getEndereco());
+        entidadePaiEntity.setNome(pai.getNome());
 
         if (!pai.meusFilhos().isEmpty()) {
-            List<Filho> filhos = pai.meusFilhos()
+            List<FilhoEntity> filhoEntities = pai.meusFilhos()
                     .stream().map(filho -> paraEntidade(filho))
                     .collect(Collectors.toList());
 
-            entidadePai.setFilhos(filhos);
+            entidadePaiEntity.setFilhos(filhoEntities);
         }
 
-        return entidadePai;
+        return entidadePaiEntity;
     }
 
-    private Filho paraEntidade(br.com.raphaelinacio.core.domain.pai.Filho filho) {
-        Filho entidadeFilho = new Filho();
-        entidadeFilho.setNome(filho.getNome());
-        entidadeFilho.setDataNacimento(filho.getDataDeNascimento());
-        return entidadeFilho;
+    private FilhoEntity paraEntidade(br.com.raphaelinacio.core.domain.pai.Filho filho) {
+        FilhoEntity entidadeFilhoEntity = new FilhoEntity();
+        entidadeFilhoEntity.setNome(filho.getNome());
+        entidadeFilhoEntity.setDataNascimento(filho.getDataDeNascimento());
+        return entidadeFilhoEntity;
     }
 
-    public br.com.raphaelinacio.core.domain.pai.Pai paraDominio(Pai pai) {
-        var dominioPai = new br.com.raphaelinacio.core.domain.pai.Pai(pai.getNome(), new Email(pai.getEmail()));
-        pai.getFilhos().stream().forEach(filho -> dominioPai.incluirFilho(paraDominio(filho)));
+    public br.com.raphaelinacio.core.domain.pai.Pai paraDominio(PaiEntity paiEntity) {
+        var dominioPai = new br.com.raphaelinacio.core.domain.pai.Pai(paiEntity.getNome(), new Email(paiEntity.getEmail()));
+        paiEntity.getFilhos().stream().forEach(filhoEntity -> dominioPai.incluirFilho(paraDominio(filhoEntity)));
         return dominioPai;
     }
 
-    private br.com.raphaelinacio.core.domain.pai.Filho paraDominio(Filho filho) {
-        return new br.com.raphaelinacio.core.domain.pai.Filho(filho.getNome(), filho.getDataNacimento());
+    private br.com.raphaelinacio.core.domain.pai.Filho paraDominio(FilhoEntity filhoEntity) {
+        return new br.com.raphaelinacio.core.domain.pai.Filho(filhoEntity.getNome(), filhoEntity.getDataNascimento());
     }
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-class CriarNovaRotinaTest extends DataBuilder {
+class CriarNovaRotinaEntityTest extends DataBuilder {
 
     CriarNovaRotina criarNovaRotina = new CriarNovaRotina(paiRepository, rotinaRepository);
 

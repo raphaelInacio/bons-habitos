@@ -6,7 +6,8 @@ import br.com.raphaelinacio.core.usecase.pai.*;
 import br.com.raphaelinacio.core.usecase.rotina.ConsultarRotinasDoSistema;
 import br.com.raphaelinacio.core.usecase.rotina.CriarRotinaSistema;
 import br.com.raphaelinacio.infra.repository.DatabaseMock;
-import br.com.raphaelinacio.infra.repository.PaiRepositoryDataStoreImpl;
+import br.com.raphaelinacio.infra.repository.datastore.PaiRepositoryDataStoreImpl;
+import br.com.raphaelinacio.infra.repository.datastore.RotinaRepositoryDataStoreImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +20,14 @@ public class Config extends DatabaseMock {
         return paiRepository;
     }
 
-    @Bean("dataStoreRepository")
-    public PaiRepository paiRepositoryDataStore() {
+    @Bean("paiRepositoryDataStoreImpl")
+    public PaiRepository paiRepositoryDataStoreImpl() {
         return new PaiRepositoryDataStoreImpl();
+    }
+
+    @Bean("rotinaRepositoryDataStoreImpl")
+    public RotinaRepository rotinaRepositoryDataStoreImpl() {
+        return new RotinaRepositoryDataStoreImpl();
     }
 
     @Bean
@@ -30,12 +36,12 @@ public class Config extends DatabaseMock {
     }
 
     @Bean
-    public CadastrarPaiNoSistema cadastrarPaiNoSistema(@Qualifier("dataStoreRepository") PaiRepository paiRepository) {
+    public CadastrarPaiNoSistema cadastrarPaiNoSistema(@Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository) {
         return new CadastrarPaiNoSistema(paiRepository);
     }
 
     @Bean
-    public BuscarMinhasInformacoes buscarMinhasInformacoes(@Qualifier("dataStoreRepository") PaiRepository paiRepository) {
+    public BuscarMinhasInformacoes buscarMinhasInformacoes(@Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository) {
         return new BuscarMinhasInformacoes(paiRepository);
     }
 
@@ -55,12 +61,12 @@ public class Config extends DatabaseMock {
     }
 
     @Bean
-    public CriarRotinaSistema criarRotinaSistema(RotinaRepository rotinaRepository) {
+    public CriarRotinaSistema criarRotinaSistema(@Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
         return new CriarRotinaSistema(rotinaRepository);
     }
 
     @Bean
-    public ConsultarRotinasDoSistema consultarRotinasDoSistema(RotinaRepository rotinaRepository) {
+    public ConsultarRotinasDoSistema consultarRotinasDoSistema(@Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
         return new ConsultarRotinasDoSistema(rotinaRepository);
     }
 

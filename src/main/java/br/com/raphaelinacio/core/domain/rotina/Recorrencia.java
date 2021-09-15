@@ -25,4 +25,8 @@ public class Recorrencia {
     public HorarioRecorrencia getHorarioRecorrencia() {
         return horarioRecorrencia;
     }
+
+    public LocalDate getDataDeInicio() {
+        return dataDeInicio;
+    }
 }

@@ -2,11 +2,12 @@ package br.com.raphaelinacio.infra.database;
 
 import lombok.Data;
 import org.springframework.cloud.gcp.data.datastore.core.mapping.Entity;
-import org.springframework.data.annotation.Id;
 
-@Entity(name = "rotinas")
+import java.time.LocalDate;
+
 @Data
-public class Rotina {
-    @Id
-    private Long id;
+@Entity(name = "Filho")
+public class FilhoEntity {
+    private String nome;
+    private LocalDate dataNascimento;
 }

@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @SpringBootTest(classes = Application.class)
 @AutoConfigureMockMvc
-public class PaiControllerTest extends DataBuilder {
+public class PaiEntityControllerTest extends DataBuilder {
 
     @Autowired
     MockMvc mvc;
@@ -35,7 +35,7 @@ public class PaiControllerTest extends DataBuilder {
     ObjectMapper mapper;
 
     @Autowired
-    @Qualifier("dataStoreRepository")
+    @Qualifier("paiRepositoryDataStoreImpl")
     private PaiRepository paiRepository;
 
     @Autowired

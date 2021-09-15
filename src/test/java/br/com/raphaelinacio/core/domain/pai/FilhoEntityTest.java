@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class FilhoTest {
+class FilhoEntityTest {
 
     @Test
     public void naoDevePermitirCadastrarFilhoComNomeVazioOuNulo() {

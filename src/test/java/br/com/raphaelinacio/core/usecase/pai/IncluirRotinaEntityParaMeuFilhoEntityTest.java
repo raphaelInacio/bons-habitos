@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-class IncluirRotinaParaMeuFilhoTest extends DataBuilder {
+class IncluirRotinaEntityParaMeuFilhoEntityTest extends DataBuilder {
 
     IncluirRotinaParaMeuFilho incluirRotinaParaMeuFilho = new IncluirRotinaParaMeuFilho(paiRepository, rotinaRepository);
 

@@ -1,4 +1,4 @@
-package br.com.raphaelinacio.infra.repository;
+package br.com.raphaelinacio.infra.repository.datastore;
 
 import br.com.raphaelinacio.core.domain.pai.Email;
 import br.com.raphaelinacio.core.domain.pai.Pai;

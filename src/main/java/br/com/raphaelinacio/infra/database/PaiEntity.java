@@ -4,11 +4,12 @@ import lombok.Data;
 import org.springframework.cloud.gcp.data.datastore.core.mapping.Entity;
 import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "pais")
+@Entity(name = "Pais")
 @Data
-public class Pai {
+public class PaiEntity {
 
     @Id
     private Long id;
@@ -17,8 +18,13 @@ public class Pai {
 
     private String nome;
 
-    private List<Filho> filhos;
+    private List<FilhoEntity> filhos;
 
-    private List<Long> rotinas;
+    private List<Long> rotinas = new ArrayList<>();
+
+    public void addicionaRotina(Long idRotina) {
+        rotinas.add(idRotina);
+    }
+
 
 }

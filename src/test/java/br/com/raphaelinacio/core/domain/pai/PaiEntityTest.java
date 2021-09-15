@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class PaiTest extends DataBuilder {
+class PaiEntityTest extends DataBuilder {
 
     @Test
     void novaDeveCriarUmPaiComDadosInvalidos() {

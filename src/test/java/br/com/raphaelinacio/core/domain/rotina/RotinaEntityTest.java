@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RotinaTest extends DataBuilder {
+class RotinaEntityTest extends DataBuilder {
 
     @Test
     void deveCriarUmaRotinaDeSistema() {

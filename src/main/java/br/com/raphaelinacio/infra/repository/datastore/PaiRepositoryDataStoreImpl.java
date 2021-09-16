@@ -28,6 +28,11 @@ public class PaiRepositoryDataStoreImpl implements PaiRepository {
     @Override
     public Pai buscarPaiPorEmail(Email email) throws PaiNaoCadastradoException {
         var pai = repository.findByEmail(email.getEndereco());
+
+        if (Objects.isNull(pai)) {
+            throw new PaiNaoCadastradoException("Não existe um pai cadastrado com esse e-mail");
+        }
+
         return paiMapper.paraDominio(pai);
     }
 

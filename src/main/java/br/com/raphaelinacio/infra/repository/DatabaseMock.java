@@ -83,6 +83,11 @@ public class DatabaseMock {
             return rotinasEncontradas;
         }
 
+        @Override
+        public void remover(UUID codigoRotina) {
+            repositorioDeRotinas.remove(codigoRotina);
+        }
+
     };
     public PaiRepository paiRepository = new PaiRepository() {
         @Override

@@ -12,4 +12,6 @@ public interface RotinaDataStoreRepository extends DatastoreRepository<RotinaEnt
     RotinaEntity findByCodigo(UUID codigo);
 
     List<RotinaEntity> findByTipoRotina(String tipoRotina);
+
+    void deleteByCodigo(UUID codigo);
 }

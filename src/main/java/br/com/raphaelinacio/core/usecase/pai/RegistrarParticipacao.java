@@ -20,8 +20,8 @@ public class RegistrarParticipacao {
     }
 
     public void executar(String enderecoEmailPai, UUID codigoRotina) throws PaiNaoCadastradoException, RotinaNaoCadastradaException {
-        Pai pai = paiRepository.buscarPaiPorEmail(new Email(enderecoEmailPai));
-        Rotina rotina = rotinaRepository.buscarMinhaRotina(pai, codigoRotina);
+        paiRepository.verificarCadastroDeEmail(new Email(enderecoEmailPai));
+        Rotina rotina = rotinaRepository.buscarRotina(codigoRotina);
         rotina.registrarParticipacaoDiaria();
         rotinaRepository.registrarParticipacao(rotina);
     }

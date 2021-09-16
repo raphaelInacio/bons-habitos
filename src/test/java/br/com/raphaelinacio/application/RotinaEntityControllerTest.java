@@ -5,6 +5,8 @@ import br.com.raphaelinacio.core.DataBuilder;
 import br.com.raphaelinacio.core.domain.rotina.Rotina;
 import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +35,19 @@ class RotinaEntityControllerTest extends DataBuilder {
     @Qualifier("rotinaRepositoryDataStoreImpl")
     private RotinaRepository rotinaRepository;
 
+    private Rotina rotina;
+
+    @BeforeEach
+    public void init() {
+        this.rotina = criarRotinaSistema();
+        rotinaRepository.criarRotinaDeSistema(rotina);
+    }
+
+    @AfterEach
+    public void destroy() {
+        rotinaRepository.remover(rotina.getCodigo());
+    }
+
     @Test
     void deveCriarUmaRotinaDeSistema() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/v1/rotinas")
@@ -46,7 +61,6 @@ class RotinaEntityControllerTest extends DataBuilder {
 
     @Test
     void deveListarTodasRotinasDeSistema() throws Exception {
-        rotinaRepository.criarRotinaDeSistema(criarRotinaSistema());
         mvc.perform(MockMvcRequestBuilders.get("/v1/rotinas")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers
@@ -57,8 +71,6 @@ class RotinaEntityControllerTest extends DataBuilder {
 
     @Test
     void deveRecuperarUmaRotinaPorCodigo() throws Exception {
-        Rotina rotina = criarRotinaSistema();
-        rotinaRepository.criarRotinaDeSistema(rotina);
         mvc.perform(MockMvcRequestBuilders.get("/v1/rotinas/" + rotina.getCodigo())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers
@@ -69,8 +81,6 @@ class RotinaEntityControllerTest extends DataBuilder {
 
     @Test
     void deveRetornar422QuandoUmCodigoDeRotinaInvalidoForEnviado() throws Exception {
-        Rotina rotina = criarRotinaSistema();
-        rotinaRepository.criarRotinaDeSistema(rotina);
         mvc.perform(MockMvcRequestBuilders.get("/v1/rotinas/" + UUID.randomUUID())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers

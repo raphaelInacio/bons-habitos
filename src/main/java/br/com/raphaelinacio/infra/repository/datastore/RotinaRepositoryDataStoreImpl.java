@@ -12,6 +12,7 @@ import br.com.raphaelinacio.infra.mapper.RotinaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -47,7 +48,11 @@ public class RotinaRepositoryDataStoreImpl implements RotinaRepository {
 
     @Override
     public List<Rotina> buscarMinhasRotinas(Pai pai) {
-        return null;
+        PaiEntity entidadePai = paiDataStoreRepository.findByEmail(pai.getEmail().getEndereco());
+        Iterable<RotinaEntity> minhasRotinasSalvas = rotinaDataStoreRepository.findAllById(entidadePai.getRotinas());
+        List<Rotina> minhasRotinas = new ArrayList<>();
+        minhasRotinasSalvas.forEach(rotinaEntity -> minhasRotinas.add(rotinaMapper.paraDominio(rotinaEntity)));
+        return minhasRotinas;
     }
 
     @Override
@@ -71,12 +76,17 @@ public class RotinaRepositoryDataStoreImpl implements RotinaRepository {
 
     @Override
     public void registrarParticipacao(Rotina rotina) {
-
+        rotinaDataStoreRepository.save(rotinaMapper.paraEntidade(rotina));
     }
 
     @Override
     public List<Rotina> buscarRotinasPorTipo(TipoRotina tipoRotina) {
         List<RotinaEntity> rotinasEncontradadas = rotinaDataStoreRepository.findByTipoRotina(tipoRotina.name());
         return rotinasEncontradadas.stream().map(rotinaMapper::paraDominio).collect(Collectors.toList());
+    }
+
+    @Override
+    public void remover(UUID codigoRotina) {
+        rotinaDataStoreRepository.deleteByCodigo(codigoRotina);
     }
 }

@@ -24,4 +24,6 @@ public interface RotinaRepository {
     void registrarParticipacao(Rotina rotina);
 
     List<Rotina> buscarRotinasPorTipo(TipoRotina tipoRotina);
+
+    void remover(UUID codigoRotina);
 }

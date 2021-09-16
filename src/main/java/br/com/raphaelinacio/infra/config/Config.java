@@ -20,6 +20,11 @@ public class Config extends DatabaseMock {
         return paiRepository;
     }
 
+    @Bean
+    public RotinaRepository rotinaRepository() {
+        return rotinaRepository;
+    }
+
     @Bean("paiRepositoryDataStoreImpl")
     public PaiRepository paiRepositoryDataStoreImpl() {
         return new PaiRepositoryDataStoreImpl();
@@ -30,43 +35,49 @@ public class Config extends DatabaseMock {
         return new RotinaRepositoryDataStoreImpl();
     }
 
-    @Bean
-    public RotinaRepository rotinaRepository() {
-        return rotinaRepository;
-    }
 
     @Bean
-    public CadastrarPaiNoSistema cadastrarPaiNoSistema(@Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository) {
+    public CadastrarPaiNoSistema cadastrarPaiNoSistema(
+            @Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository) {
         return new CadastrarPaiNoSistema(paiRepository);
     }
 
     @Bean
-    public BuscarMinhasInformacoes buscarMinhasInformacoes(@Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository) {
+    public BuscarMinhasInformacoes buscarMinhasInformacoes(
+            @Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository) {
         return new BuscarMinhasInformacoes(paiRepository);
     }
 
     @Bean
-    public ConsultarMinhasRotinas consultarMinhasRotinas(PaiRepository paiRepository, RotinaRepository rotinaRepository) {
+    public ConsultarMinhasRotinas consultarMinhasRotinas(
+            @Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository,
+            @Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
         return new ConsultarMinhasRotinas(paiRepository, rotinaRepository);
     }
 
     @Bean
-    public CriarNovaRotina criarNovaRotina(PaiRepository paiRepository, RotinaRepository rotinaRepository) {
+    public CriarNovaRotina criarNovaRotina(
+            @Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository,
+            @Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
         return new CriarNovaRotina(paiRepository, rotinaRepository);
     }
 
     @Bean
-    public RegistrarParticipacao registrarParticipacao(PaiRepository paiRepository, RotinaRepository rotinaRepository) {
+    public RegistrarParticipacao registrarParticipacao(
+            @Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository,
+            @Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
         return new RegistrarParticipacao(paiRepository, rotinaRepository);
     }
 
     @Bean
-    public CriarRotinaSistema criarRotinaSistema(@Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
+    public CriarRotinaSistema criarRotinaSistema(
+            @Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
         return new CriarRotinaSistema(rotinaRepository);
     }
 
     @Bean
-    public ConsultarRotinasDoSistema consultarRotinasDoSistema(@Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
+    public ConsultarRotinasDoSistema consultarRotinasDoSistema(
+            @Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
         return new ConsultarRotinasDoSistema(rotinaRepository);
     }
 

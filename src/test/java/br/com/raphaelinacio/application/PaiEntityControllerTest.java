@@ -8,6 +8,7 @@ import br.com.raphaelinacio.core.domain.pai.exception.PaiRepository;
 import br.com.raphaelinacio.core.domain.rotina.dto.RotinaDTO;
 import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,21 @@ public class PaiEntityControllerTest extends DataBuilder {
     private PaiRepository paiRepository;
 
     @Autowired
+    @Qualifier("rotinaRepositoryDataStoreImpl")
     private RotinaRepository rotinaRepository;
+
+    private Pai pai = criarPai();
 
     @BeforeEach
     public void setup() {
         Pai pai = criarPai();
         paiRepository.removerCadastro(pai.getEmail());
+    }
+
+    @AfterEach
+    public void destroy() {
+        paiRepository.removerCadastro(pai.getEmail());
+
     }
 
     private Pai criarPaiNoBanco() {

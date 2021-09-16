@@ -85,6 +85,11 @@ public class DatabaseMock {
             return rotinasEncontradas;
         }
 
+        @Override
+        public void remover(UUID codigoRotina) {
+            repositorioDeRotinas.remove(codigoRotina);
+        }
+
     };
 
     public AtividadeRepository atividadeRepository = new AtividadeRepository() {

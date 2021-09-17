@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @SpringBootTest(classes = Application.class)
 @AutoConfigureMockMvc
-public class PaiEntityControllerTest extends DataBuilder {
+public class PaiControllerTest extends DataBuilder {
 
     @Autowired
     MockMvc mvc;
@@ -114,6 +114,18 @@ public class PaiEntityControllerTest extends DataBuilder {
         Pai pai = criarPaiComRotinaNoBanco();
         UUID codigo = pai.minhaRotina().stream().findFirst().get().getCodigo();
         mvc.perform(MockMvcRequestBuilders.post("/v1/pais/" + pai.getEmail().getEndereco() + "/rotinas/" + codigo)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers
+                        .status()
+                        .isCreated())
+                .andDo(print());
+    }
+
+    @Test
+    void deveIncluirUmaRotinaDeSistemaParaUmFilho() throws Exception {
+        Pai pai = criarPaiComRotinaNoBanco();
+        UUID codigo = pai.minhaRotina().stream().findFirst().get().getCodigo();
+        mvc.perform(MockMvcRequestBuilders.post("/v1/pais/" + pai.getEmail().getEndereco() + "/rotinas/" + codigo + "/incluir")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers
                         .status()

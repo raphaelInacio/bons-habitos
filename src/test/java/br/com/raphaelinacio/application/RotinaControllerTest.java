@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @SpringBootTest(classes = Application.class)
 @AutoConfigureMockMvc
-class RotinaEntityControllerTest extends DataBuilder {
+class RotinaControllerTest extends DataBuilder {
 
     @Autowired
     MockMvc mvc;

@@ -5,6 +5,7 @@ import br.com.raphaelinacio.core.domain.pai.Pai;
 import br.com.raphaelinacio.core.domain.pai.repository.PaiNaoCadastradoException;
 import br.com.raphaelinacio.core.domain.pai.exception.PaiRepository;
 import br.com.raphaelinacio.core.domain.rotina.Rotina;
+import br.com.raphaelinacio.core.domain.rotina.TipoRotina;
 import br.com.raphaelinacio.core.domain.rotina.exception.RotinaNaoCadastradaException;
 import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 
@@ -20,7 +21,7 @@ public class IncluirRotinaParaMeuFilho {
         this.rotinaRepository = atividadeRepository;
     }
 
-    void executar(String enderecoEmailPai, UUID codigoRotina) throws RotinaNaoCadastradaException, PaiNaoCadastradoException {
+    public void executar(String enderecoEmailPai, UUID codigoRotina) throws RotinaNaoCadastradaException, PaiNaoCadastradoException {
         Email email = new Email(enderecoEmailPai);
 
         Pai pai = paiRepository.buscarPaiPorEmail(email);
@@ -29,7 +30,7 @@ public class IncluirRotinaParaMeuFilho {
 
         rotina.registrarParticipacaoDiaria();
 
-        rotinaRepository.associarRotina(pai, rotina);
+        rotinaRepository.associarRotina(pai, new Rotina(rotina.getRecorrencia(), rotina.getAtividade(), TipoRotina.PAI));
     }
 
 }

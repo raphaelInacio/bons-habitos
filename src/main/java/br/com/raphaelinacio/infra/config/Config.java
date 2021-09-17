@@ -37,6 +37,13 @@ public class Config extends DatabaseMock {
 
 
     @Bean
+    public IncluirRotinaParaMeuFilho incluirRotinaParaMeuFilho(
+            @Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository,
+            @Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
+        return new IncluirRotinaParaMeuFilho(paiRepository, rotinaRepository);
+    }
+
+    @Bean
     public CadastrarPaiNoSistema cadastrarPaiNoSistema(
             @Qualifier("paiRepositoryDataStoreImpl") PaiRepository paiRepository) {
         return new CadastrarPaiNoSistema(paiRepository);

@@ -39,12 +39,7 @@ public class PaiRepositoryDataStoreImpl implements PaiRepository {
     @Override
     public boolean verificarCadastroDeEmail(Email email) throws PaiNaoCadastradoException {
         var pai = repository.findByEmail(email.getEndereco());
-
-        if (Objects.nonNull(pai)) {
-            return true;
-        }
-
-        return false;
+        return Objects.nonNull(pai);
     }
 
     @Override

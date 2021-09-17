@@ -71,7 +71,10 @@ public class RotinaRepositoryDataStoreImpl implements RotinaRepository {
 
     @Override
     public void associarRotina(Pai pai, Rotina rotina) throws RotinaNaoCadastradaException {
-
+        RotinaEntity rotinaSalva = rotinaDataStoreRepository.save(rotinaMapper.paraEntidade(rotina));
+        PaiEntity paiEntity = paiDataStoreRepository.findByEmail(pai.getEmail().getEndereco());
+        paiEntity.addicionaRotina(rotinaSalva.getId());
+        paiDataStoreRepository.save(paiEntity);
     }
 
     @Override

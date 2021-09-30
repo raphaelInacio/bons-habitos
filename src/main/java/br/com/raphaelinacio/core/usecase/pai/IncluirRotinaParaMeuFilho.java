@@ -23,13 +23,9 @@ public class IncluirRotinaParaMeuFilho {
 
     public void executar(String enderecoEmailPai, UUID codigoRotina) throws RotinaNaoCadastradaException, PaiNaoCadastradoException {
         Email email = new Email(enderecoEmailPai);
-
         Pai pai = paiRepository.buscarPaiPorEmail(email);
-
         Rotina rotina = rotinaRepository.buscarRotina(codigoRotina);
-
         rotina.registrarParticipacaoDiaria();
-
         rotinaRepository.associarRotina(pai, new Rotina(rotina.getRecorrencia(), rotina.getAtividade(), TipoRotina.PAI));
     }
 

@@ -20,11 +20,8 @@ public class CriarNovaRotina {
 
     public void executar(String enderecoDeEmail, RotinaDTO rotinaDTO) throws PaiNaoCadastradoException {
         var email = new Email(enderecoDeEmail);
-
         Pai pai = paiRepository.buscarPaiPorEmail(email);
-
         Rotina rotina = rotinaDTO.converterParaRotinaPai();
-
         rotinaRepository.criarRotina(pai, rotina);
     }
 

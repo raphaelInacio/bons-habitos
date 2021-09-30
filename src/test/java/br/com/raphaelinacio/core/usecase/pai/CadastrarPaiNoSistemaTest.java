@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-class CadastrarPaiEntityNoSistemaTest extends DataBuilder {
+class CadastrarPaiNoSistemaTest extends DataBuilder {
 
     private CadastrarPaiNoSistema cadastrarPaiNoSistema = new CadastrarPaiNoSistema(paiRepository);
 

@@ -62,9 +62,7 @@ public class DatabaseMock {
 
         @Override
         public void associarRotina(Pai pai, Rotina rotina) throws RotinaNaoCadastradaException {
-            if (!repositorioDeRotinas.containsKey(rotina.getCodigo()))
-                throw new RotinaNaoCadastradaException("Rotina não cadastrada");
-            Rotina rotinaEncontrada = this.buscarRotina(rotina.getCodigo());
+            criarRotina(pai, rotina);
         }
 
         @Override

@@ -15,17 +15,12 @@ public class CadastrarPaiNoSistema {
     }
 
     public void executar(CadastroPaiDTO cadastroPaiDTO) throws CadastroPaiException, PaiNaoCadastradoException {
-
         var jaExisteCadastro = paiRepository.verificarCadastroDeEmail(new Email(cadastroPaiDTO.getEnderecoEmailPai()));
-
         if (jaExisteCadastro) {
             throw new CadastroPaiException("Já existe um cadastro de PAI para esse e-mail");
         }
-
         var pai = new Pai(cadastroPaiDTO.getNomeDoPai(), new Email(cadastroPaiDTO.getEnderecoEmailPai()));
-
         pai.incluirFilho(new Filho(cadastroPaiDTO.getNomeFilho(), cadastroPaiDTO.getDataNascimentoFilho()));
-
         paiRepository.cadastrarPai(pai);
     }
 }

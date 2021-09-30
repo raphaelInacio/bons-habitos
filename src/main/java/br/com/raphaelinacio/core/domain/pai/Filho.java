@@ -12,11 +12,9 @@ public class Filho {
         if (nome == null || nome == "") {
             throw new IllegalArgumentException("Nome invalido informado");
         }
-
         if (dataDeNascimento == null) {
             throw new IllegalArgumentException("Data de Nascimento invalida informada");
         }
-
         this.nome = nome;
         this.dataDeNascimento = dataDeNascimento;
     }

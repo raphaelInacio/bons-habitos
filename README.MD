@@ -51,3 +51,4 @@ Os pilares para a construção dessa aplicação são TDD, Clean Architeture, SO
 * Deploy via GCLOUD ``gcloud app deploy  src/main/appengine/app.yaml``
 * Deploy app no appengine via mvn ``mvn clean package appengine:deploy``
 * App ``https://play.google.com/store/apps/details?id=com.raphaelinacio.goodha``
+

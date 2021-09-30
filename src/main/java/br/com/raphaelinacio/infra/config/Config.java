@@ -5,7 +5,6 @@ import br.com.raphaelinacio.core.domain.rotina.repository.RotinaRepository;
 import br.com.raphaelinacio.core.usecase.pai.*;
 import br.com.raphaelinacio.core.usecase.rotina.ConsultarRotinasDoSistema;
 import br.com.raphaelinacio.core.usecase.rotina.CriarRotinaSistema;
-import br.com.raphaelinacio.infra.repository.DatabaseMock;
 import br.com.raphaelinacio.infra.repository.datastore.PaiRepositoryDataStoreImpl;
 import br.com.raphaelinacio.infra.repository.datastore.RotinaRepositoryDataStoreImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,17 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class Config extends DatabaseMock {
-
-    @Bean
-    public PaiRepository paiRepository() {
-        return paiRepository;
-    }
-
-    @Bean
-    public RotinaRepository rotinaRepository() {
-        return rotinaRepository;
-    }
+public class Config {
 
     @Bean("paiRepositoryDataStoreImpl")
     public PaiRepository paiRepositoryDataStoreImpl() {
@@ -34,7 +23,6 @@ public class Config extends DatabaseMock {
     public RotinaRepository rotinaRepositoryDataStoreImpl() {
         return new RotinaRepositoryDataStoreImpl();
     }
-
 
     @Bean
     public IncluirRotinaParaMeuFilho incluirRotinaParaMeuFilho(
@@ -86,10 +74,5 @@ public class Config extends DatabaseMock {
     public ConsultarRotinasDoSistema consultarRotinasDoSistema(
             @Qualifier("rotinaRepositoryDataStoreImpl") RotinaRepository rotinaRepository) {
         return new ConsultarRotinasDoSistema(rotinaRepository);
-    }
-
-    @Bean("mock-api")
-    public DatabaseMock databaseMock() {
-        return new DatabaseMock();
     }
 }

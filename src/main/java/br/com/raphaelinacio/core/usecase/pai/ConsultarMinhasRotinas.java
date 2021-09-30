@@ -23,15 +23,11 @@ public class ConsultarMinhasRotinas {
 
     public List<RotinaDTO> executar(String enderecoEmail) throws PaiNaoCadastradoException {
         Email email = new Email(enderecoEmail);
-
         Pai pai = paiRepository.buscarPaiPorEmail(email);
-
         List<Rotina> minhasRotinas = rotinaRepository.buscarMinhasRotinas(pai);
-
         if (minhasRotinas.isEmpty()) {
             return Collections.emptyList();
         }
-
         return RotinaDTO.converter(minhasRotinas);
     }
 }
